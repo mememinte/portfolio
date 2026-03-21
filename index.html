@@ -96,115 +96,122 @@ footer a:hover{text-decoration:underline}
 <script>
 var D=[
 {y:"2022-2024",p:[
-{n:"Electric Square Singapore - FX Artist",s:"Parallel: A Sci-Fi Card Game",c:"job",l:"Job",m:[],
+{n:"Electric Square Singapore - FX Artist",s:"Parallel: A Sci-Fi Card Game",c:"job",l:"Job",
+m:[],
 x:"<h3>Company</h3><p>Electric Square Singapore - working on <strong>Parallel</strong>, a sci-fi card game.</p><h3>Responsibilities</h3><ul><li>Special effects for each card type in sci-fi style, focusing on color and motion</li><li>Shaders for Paragons: <strong>SSS shader</strong>, eye shader, hair shader, <strong>PBR Lit shader</strong> with custom lighting</li><li>Transition shaders when user selects a Paragon</li><li>Card shaders using Unlit shader with custom lighting</li><li>Special effects for rare card types</li><li>Prototype effects using <strong>VFX Graph</strong></li><li>Optimize effects based on engine profiler</li><li>Mentor new FX artists on Unity pipeline</li></ul>",
 t:["Unity","VFX Graph","SSS Shader","PBR","Custom Lighting","Unlit Shader","Optimization"]},
-{n:"AI Animation Pipeline",s:"Auto-rig 2D sprites with Anthropic Vision API",c:"tool",l:"Tool",m:[],
+{n:"AI Animation Pipeline",s:"Auto-rig 2D sprites with Anthropic Vision API",c:"tool",l:"Tool",
+m:[],
 x:"<h3>Overview</h3><p>Unity Editor tool using the Anthropic Vision API to analyze 2D sprite sheets and auto-generate bone rigs and animation clips.</p><h3>Pipeline</h3><ul><li><strong>Import</strong> - drag in PSD or PNG sprite sheet</li><li><strong>Layout</strong> - auto-slice parts by layer or grid</li><li><strong>AI Rig</strong> - Vision API identifies joints and bone hierarchy</li><li><strong>Review</strong> - artist tweaks bone positions</li><li><strong>Generate</strong> - outputs .anim clips and AnimatorController</li></ul>",
 t:["Editor Scripting","Anthropic API","AnimatorController","AI","2D Animation"]},
-{n:"Texture Creator FX",s:"Procedural texture generator - 115 shader types",c:"tool",l:"Tool",m:[],
+{n:"Texture Creator FX",s:"Procedural texture generator - 115 shader types",c:"tool",l:"Tool",
+m:[],
 x:"<h3>Overview</h3><p>GPU-driven procedural texture generator inside Unity Editor. 115 HLSL shader types with real-time preview, GPU post-effects, PNG/EXR export.</p>",
 t:["HLSL","GPU","Editor GUI","Procedural","Unity"]}
 ]},
 {y:"2019-2021",p:[
-{n:"VNG Corporation - FX Artist",s:"Dead Target / Zombie Hunter / Sniper Zombie",c:"job",l:"Job",m:[{kind:"vimeo",src:"https://player.vimeo.com/video/949023837?h=84a682c875",caption:"VNG Corporation - FX Reel"}],,
+{n:"VNG Corporation - FX Artist",s:"Dead Target / Zombie Hunter / Sniper Zombie",c:"job",l:"Job",
+m:[{kind:"vimeo",src:"https://player.vimeo.com/video/949023837?h=84a682c875",caption:"VNG Corporation - FX Reel"}],
 x:"<h3>Games</h3><ul><li><strong>Dead Target</strong></li><li><strong>Zombie Hunter</strong></li><li><strong>Sniper Zombie</strong></li></ul><h3>Responsibilities</h3><ul><li>In-game effects: blood, muzzle flash, last shot, UI motion, UI effects</li><li>Custom shaders and shader optimization for mobile</li></ul><h3>Notable</h3><p>VFX Artist on <strong>Justin Bieber VR Music Concept</strong> for Future House Studio - VFX Graph effects, Houdini fracture assets, lightning shapes, ground destruction simulation.</p>",
 t:["Unity","VFX Graph","Houdini","Mobile Optimization","Custom Shader","VR"]}
 ]},
 {y:"2018-2019",p:[
-{n:"Virtuous Viet Nam (Sparx*) - FX Artist",s:"Age of Empires / Lego Star Wars",c:"job",l:"Job",m:[],
+{n:"Virtuous Viet Nam (Sparx*) - FX Artist",s:"Age of Empires / Lego Star Wars",c:"job",l:"Job",
+m:[],
 x:"<h3>Responsibilities</h3><ul><li>Building destruction effects for <strong>Age of Empires</strong> (castle, market, house) using Houdini</li><li>Cloth simulation for <strong>Lego Star Wars</strong></li></ul>",
 t:["Houdini","Destruction FX","Cloth Simulation","Age of Empires","Lego Star Wars"]}
 ]},
 {y:"2010-2018",p:[
-{n:"568e - Video Editor",s:"Game trailers, video ads, 2D animation",c:"job",l:"Job",m:[],
+{n:"568e - Video Editor",s:"Game trailers, video ads, 2D animation",c:"job",l:"Job",
+m:[],
 x:"<h3>Responsibilities</h3><ul><li>Creating videos for game trailers and video ads</li><li>2D animation for in-game loading screens and websites</li></ul>",
 t:["Video Editing","2D Animation","Game Trailer","Motion Graphics"]}
 ]},
 {y:"2009",p:[
-{n:"VNG Corporation - Game Tester",s:"QA for patches and events",c:"job",l:"Job",m:[],
+{n:"VNG Corporation - Game Tester",s:"QA for patches and events",c:"job",l:"Job",
+m:[],
 x:"<h3>Responsibilities</h3><ul><li>Test new patches and events before publishing</li></ul>",
 t:["QA","Game Testing","VNG"]}
 ]}
 ];
 
-function sid(y){return y.replace(/[^a-z0-9]/gi,'_')}
+function sid(y){return y.replace(/[^a-z0-9]/gi,"_")}
 
 function buildNav(){
-  var nav=document.getElementById('ynav');
+  var nav=document.getElementById("ynav");
   D.forEach(function(y,i){
-    var b=document.createElement('button');
-    b.className='ybtn'+(i===0?' on':'');
+    var b=document.createElement("button");
+    b.className="ybtn"+(i===0?" on":"");
     b.textContent=y.y;
     b.onclick=function(){
-      document.querySelectorAll('.ybtn').forEach(function(x){x.classList.remove('on')});
-      b.classList.add('on');
-      var el=document.getElementById('ys-'+sid(y.y));
-      if(el)el.scrollIntoView({behavior:'smooth'});
+      document.querySelectorAll(".ybtn").forEach(function(x){x.classList.remove("on")});
+      b.classList.add("on");
+      var el=document.getElementById("ys-"+sid(y.y));
+      if(el)el.scrollIntoView({behavior:"smooth"});
     };
     nav.appendChild(b);
   });
 }
 
 function rmedia(m,vid,main){
-  if(m.kind==='img')return '<img '+(main?'id="'+vid+'-v" style="width:100%;max-height:360px;object-fit:contain;display:block;"':'loading="lazy"')+' src="'+m.src+'" />';
-  if(m.kind==='video')return '<video '+(main?'id="'+vid+'-v" controls style="width:100%;max-height:360px;display:block;"':'muted preload="metadata"')+' src="'+m.src+'"></video>';
-  if(m.kind==='vimeo'||m.kind==='youtube'){
+  if(m.kind==="img")return "<img "+(main?"id=\""+vid+"-v\" style=\"width:100%;max-height:360px;object-fit:contain;display:block;\"":"loading=\"lazy\"")+' src="'+m.src+'" />';
+  if(m.kind==="video")return "<video "+(main?"id=\""+vid+"-v\" controls style=\"width:100%;max-height:360px;display:block;\"":"muted preload=\"metadata\"")+' src="'+m.src+'"></video>';
+  if(m.kind==="vimeo"||m.kind==="youtube"){
     if(main)return '<iframe id="'+vid+'-v" src="'+m.src+'" style="width:100%;height:360px;border:none;display:block;" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
     return '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#222;color:#aaa;font-size:22px;">&#9654;</div>';
   }
-  return '';
+  return "";
 }
 
 function buildTimeline(){
-  var tc=document.getElementById('tc');
+  var tc=document.getElementById("tc");
   D.forEach(function(y){
-    var sec=document.createElement('div');
-    sec.className='ysec';
-    sec.id='ys-'+sid(y.y);
+    var sec=document.createElement("div");
+    sec.className="ysec";
+    sec.id="ys-"+sid(y.y);
     var ph=y.p.map(function(p,i){
-      var id='p'+sid(y.y)+'_'+i;
+      var id="p"+sid(y.y)+"_"+i;
       var first=p.m&&p.m.length?p.m[0]:null;
-      var vh='';
+      var vh="";
       if(first){
-        vh='<div class="mview">'+rmedia(first,id,true)+'</div><div class="mcap" id="'+id+'-c">'+(first.caption||'')+'</div>';
+        vh='<div class="mview">'+rmedia(first,id,true)+'</div><div class="mcap" id="'+id+'-c">'+(first.caption||"")+"</div>";
         if(p.m.length>1){
           vh+='<div class="mthumbs">'+p.m.map(function(m,mi){
-            return '<div class="mthumb'+(mi===0?' on':'')+'" onclick="sm(\''+id+'\','+mi+')" data-src="'+m.src+'" data-kind="'+m.kind+'" data-cap="'+(m.caption||'')+'">'+rmedia(m,id,false)+'</div>';
-          }).join('')+'</div>';
+            return '<div class="mthumb'+(mi===0?" on":"")+'" onclick="sm(''+id+'','+mi+')" data-src="'+m.src+'" data-kind="'+m.kind+'" data-cap="'+(m.caption||"")+'">'+rmedia(m,id,false)+"</div>";
+          }).join("")+"</div>";
         }
       }
-      return '<div class="card" id="'+id+'"><div class="phead" onclick="tog(\''+id+'\')">'
-        +'<div><div class="pname">'+p.n+'</div><div class="psub">'+(p.s||'')+'</div></div>'
+      return '<div class="card" id="'+id+'"><div class="phead" onclick="tog(''+id+'')">'
+        +'<div><div class="pname">'+p.n+'</div><div class="psub">'+(p.s||"")+"</div></div>"
         +'<div style="display:flex;align-items:center;gap:8px;flex-shrink:0"><span class="badge '+p.c+'">'+p.l+'</span><span class="arr">&#9662;</span></div>'
         +'</div><div class="pbody">'+vh+'<div class="ptext">'+p.x+'</div>'
-        +'<div class="ptags">'+p.t.map(function(t){return '<span class="ptag">'+t+'</span>';}).join('')+'</div>'
-        +'</div></div>';
-    }).join('');
-    sec.innerHTML='<div class="yhead"><span class="ynum">'+y.y+'</span><div class="yline"></div><span class="ycnt">'+y.p.length+' project'+(y.p.length!==1?'s':'')+'</span></div><div class="plist">'+ph+'</div>';
+        +'<div class="ptags">'+p.t.map(function(t){return '<span class="ptag">'+t+"</span>";}).join("")+"</div>"
+        +"</div></div>";
+    }).join("");
+    sec.innerHTML='<div class="yhead"><span class="ynum">'+y.y+'</span><div class="yline"></div><span class="ycnt">'+y.p.length+" project"+(y.p.length!==1?"s":"")+'</span></div><div class="plist">'+ph+"</div>";
     tc.appendChild(sec);
   });
 }
 
-function tog(id){document.getElementById(id).classList.toggle('open')}
+function tog(id){document.getElementById(id).classList.toggle("open")}
 
 function sm(cid,idx){
   var card=document.getElementById(cid);
-  card.querySelectorAll('.mthumb').forEach(function(t,i){t.classList.toggle('on',i===idx)});
-  var th=card.querySelectorAll('.mthumb')[idx];
-  var kind=th.dataset.kind,src=th.dataset.src,cap=th.dataset.cap||'';
-  var v=document.getElementById(cid+'-v');
-  if(kind==='vimeo'||kind==='youtube'){
-    if(v.tagName!=='IFRAME'){var f=document.createElement('iframe');f.id=cid+'-v';f.style='width:100%;height:360px;border:none;display:block;';f.allow='autoplay; fullscreen; picture-in-picture';f.allowFullscreen=true;v.replaceWith(f);v=f;}
+  card.querySelectorAll(".mthumb").forEach(function(t,i){t.classList.toggle("on",i===idx)});
+  var th=card.querySelectorAll(".mthumb")[idx];
+  var kind=th.dataset.kind,src=th.dataset.src,cap=th.dataset.cap||"";
+  var v=document.getElementById(cid+"-v");
+  if(kind==="vimeo"||kind==="youtube"){
+    if(v.tagName!=="IFRAME"){var f=document.createElement("iframe");f.id=cid+"-v";f.style="width:100%;height:360px;border:none;display:block;";f.allow="autoplay; fullscreen; picture-in-picture";f.allowFullscreen=true;v.replaceWith(f);v=f;}
     v.src=src;
-  }else if(kind==='img'){
-    if(v.tagName!=='IMG'){var im=document.createElement('img');im.id=cid+'-v';im.style='width:100%;max-height:360px;object-fit:contain;display:block;';v.replaceWith(im);v=im;}
+  }else if(kind==="img"){
+    if(v.tagName!=="IMG"){var im=document.createElement("img");im.id=cid+"-v";im.style="width:100%;max-height:360px;object-fit:contain;display:block;";v.replaceWith(im);v=im;}
     v.src=src;
   }else{
-    if(v.tagName!=='VIDEO'){var vd=document.createElement('video');vd.id=cid+'-v';vd.controls=true;vd.style='width:100%;max-height:360px;display:block;';v.replaceWith(vd);v=vd;}
+    if(v.tagName!=="VIDEO"){var vd=document.createElement("video");vd.id=cid+"-v";vd.controls=true;vd.style="width:100%;max-height:360px;display:block;";v.replaceWith(vd);v=vd;}
     v.src=src;v.load();
   }
-  var c=document.getElementById(cid+'-c');
+  var c=document.getElementById(cid+"-c");
   if(c)c.textContent=cap;
 }
 
