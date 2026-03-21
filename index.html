@@ -119,6 +119,7 @@
   /* MEDIA */
   .media-viewer { background: #111; }
   .media-viewer img, .media-viewer video { width: 100%; max-height: 360px; object-fit: contain; display: block; }
+  .media-viewer iframe { width: 100%; height: 360px; border: none; display: block; }
   .media-caption { font-size: 11px; color: var(--hint); padding: 8px 20px; text-align: center; border-bottom: 0.5px solid var(--border); }
   .media-thumbs { display: flex; gap: 8px; padding: 12px 20px; overflow-x: auto; scrollbar-width: none; border-bottom: 0.5px solid var(--border); }
   .media-thumbs::-webkit-scrollbar { display: none; }
@@ -157,12 +158,12 @@
   <section class="hero">
     <span class="hero-tag">Realtime FX Artist</span>
     <h1>Triet Do Minh <span>/ 15 years in game industry</span></h1>
-    <p class="hero-bio">FX Artist with 15 years of experience in the gaming industry and 6+ years creating special effects — explosions, destruction, and game effects using particle systems, custom shaders, Houdini, and Unity. Actively leveraging AI tools to build custom Unity Editor tooling that accelerates VFX workflows — automating repetitive pipeline tasks and reducing manual overhead so more time goes into the actual craft.</p>
+    <p class="hero-bio">FX Artist with 15 years of experience in the gaming industry and 6+ years creating special effects — explosions, destruction, and game effects using particle systems, custom shaders, Houdini, and Unity. Currently deepening skills in custom lighting, shader writing, and C# integration.</p>
     <div class="hero-contacts">
-     <a class="hero-contact" href="mailto:minte131@gmail.com">✉ minte131@gmail.com</a>
-     <a class="hero-contact" href="https://linkedin.com/in/do-minh-triet-688b4994/" target="_blank">in LinkedIn</a>
-     <a class="hero-contact" href="https://www.artstation.com/minte131" target="_blank">⬡ ArtStation</a>
-     <a class="hero-contact" href="https://trietvfx.dev">⬡ trietvfx.dev</a>
+      <a class="hero-contact" href="/cdn-cgi/l/email-protection#0b6662657f6e3a383a4b6c666a626725686466">✉ <span class="__cf_email__" data-cfemail="34595d5a4051050705745359555d581a575b59">[email&#160;protected]</span></a>
+      <a class="hero-contact" href="tel:+84949209911">✆ +84.949.209.911</a>
+      <a class="hero-contact" href="https://linkedin.com/in/do-minh-triet-688b4994/" target="_blank">in LinkedIn</a>
+      <a class="hero-contact" href="https://trietvfx.dev">⬡ trietvfx.dev</a>
     </div>
     <div class="skills">
       <span class="skill">Unity URP</span>
@@ -185,11 +186,11 @@
   <div id="timelineContainer"></div>
 
   <footer>
-    <p>trietvfx.dev &nbsp;·&nbsp; <a href="mailto:minte131@gmail.com">minte131@gmail.com</a></p>
+    <p>trietvfx.dev &nbsp;·&nbsp; <a href="/cdn-cgi/l/email-protection#e38e8a8d9786d2d0d2a3848e828a8fcd808c8e"><span class="__cf_email__" data-cfemail="55383c3b2130646664153238343c397b363a38">[email&#160;protected]</span></a></p>
   </footer>
 
 </div>
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const data = [
   {
     year: "2022–2024",
@@ -368,14 +369,23 @@ function buildTimeline() {
       const id = `p${safeId}-${pi}`;
       const hasMedia = p.media && p.media.length > 0;
       const first = hasMedia ? p.media[0] : null;
+      function renderMedia(m, vid, isMain) {
+        if (m.kind==='img') return `<img ${isMain?`id="${vid}-viewer" style="width:100%;max-height:360px;object-fit:contain;display:block;"`:'loading="lazy"'} src="${m.src}" />`;
+        if (m.kind==='video') return `<video ${isMain?`id="${vid}-viewer" controls style="width:100%;max-height:360px;display:block;"`:'muted preload="metadata"'} src="${m.src}"></video>`;
+        if (m.kind==='vimeo'||m.kind==='youtube') {
+          if (isMain) return `<iframe id="${vid}-viewer" src="${m.src}" style="width:100%;height:360px;border:none;display:block;" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
+          return `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#222;color:#aaa;font-size:22px;">&#9654;</div>`;
+        }
+        return '';
+      }
       const viewerHTML = first ? `
         <div class="media-viewer">
-          ${first.kind==='img' ? `<img id="${id}-viewer" src="${first.src}" />` : `<video id="${id}-viewer" src="${first.src}" controls></video>`}
+          ${renderMedia(first, id, true)}
         </div>
         <div class="media-caption" id="${id}-caption">${first.caption||''}</div>
         ${p.media.length > 1 ? `<div class="media-thumbs">${p.media.map((m,mi) => `
           <div class="media-thumb${mi===0?' active':''}" onclick="selectMedia('${id}',${mi})" data-src="${m.src}" data-kind="${m.kind}" data-caption="${m.caption||''}">
-            ${m.kind==='img'?`<img src="${m.src}" loading="lazy" />`:`<video src="${m.src}" muted preload="metadata"></video>`}
+            ${renderMedia(m, id, false)}
           </div>`).join('')}</div>` : ''}
       ` : '';
 
@@ -419,18 +429,9 @@ function selectMedia(cardId, idx) {
   const thumb = thumbs[idx];
   const kind = thumb.dataset.kind, src = thumb.dataset.src, caption = thumb.dataset.caption||'';
   let viewer = document.getElementById(cardId+'-viewer');
-  if (kind==='img') {
-    if (viewer.tagName==='VIDEO') { const img=document.createElement('img'); img.id=cardId+'-viewer'; viewer.replaceWith(img); viewer=img; }
+  if (kind==='vimeo'||kind==='youtube') {
+    if (viewer.tagName!=='IFRAME') { const fr=document.createElement('iframe'); fr.id=cardId+'-viewer'; fr.style='width:100%;height:360px;border:none;display:block;'; fr.allow='autoplay; fullscreen; picture-in-picture'; fr.allowFullscreen=true; viewer.replaceWith(fr); viewer=fr; }
     viewer.src = src;
-  } else {
-    if (viewer.tagName==='IMG') { const vid=document.createElement('video'); vid.id=cardId+'-viewer'; vid.controls=true; viewer.replaceWith(vid); viewer=vid; }
-    viewer.src = src; viewer.load();
-  }
-  const cap = document.getElementById(cardId+'-caption');
-  if (cap) cap.textContent = caption;
-}
-
-buildNav(); buildTimeline();
-</script>
-</body>
-</html>
+  } else if (kind==='img') {
+    if (viewer.tagName!=='IMG') { const img=document.createElement('img'); img.id=cardId+'-viewer'; img.style='width:100%;max-height:360px;object-fit:contain;display:block;'; viewer.replaceWith(img); viewer=img; }
+    viewer.src
