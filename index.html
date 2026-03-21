@@ -86,7 +86,7 @@ footer a:hover { text-decoration: underline; }
     <h1>Triet Do Minh <span>/ 15 years in game industry</span></h1>
     <p class="bio">FX Artist with 15 years of experience in the gaming industry and 6+ years creating special effects — explosions, destruction, and game effects using particle systems, custom shaders, Houdini, and Unity. Currently deepening skills in custom lighting, shader writing, and C# integration. Actively leveraging AI tools to build custom Unity Editor tooling that accelerates VFX workflows — automating repetitive pipeline tasks and reducing manual overhead so more time goes into the actual craft.</p>
     <div class="contacts">
-      <a class="contact" href="mailto:minte131@gmail.com">&#9993; minte131@gmail.com</a>
+      <a class="contact" href="/cdn-cgi/l/email-protection#583531362c3d696b69183f35393134763b3735">&#9993; <span class="__cf_email__" data-cfemail="f99490978d9cc8cac8b99e94989095d79a9694">[email&#160;protected]</span></a>
       <a class="contact" href="https://linkedin.com/in/do-minh-triet-688b4994/" target="_blank">in LinkedIn</a>
       <a class="contact" href="https://www.artstation.com/minte131" target="_blank">&#9671; ArtStation</a>
       <a class="contact" href="https://trietvfx.dev">&#11042; trietvfx.dev</a>
@@ -112,11 +112,11 @@ footer a:hover { text-decoration: underline; }
   <div id="tc"></div>
 
   <footer>
-    <p>trietvfx.dev &nbsp;&middot;&nbsp; <a href="mailto:minte131@gmail.com">minte131@gmail.com</a></p>
+    <p>trietvfx.dev &nbsp;&middot;&nbsp; <a href="/cdn-cgi/l/email-protection#97fafef9e3f2a6a4a6d7f0faf6fefbb9f4f8fa"><span class="__cf_email__" data-cfemail="3c51555248590d0f0d7c5b515d5550125f5351">[email&#160;protected]</span></a></p>
   </footer>
 
 </div>
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 
 var D = [
   {
@@ -183,11 +183,6 @@ var D = [
           {
             "kind": "vimeo",
             "src": "https://player.vimeo.com/video/949023837?h=84a682c875",
-            "caption": "VNG Corporation - FX Reel"
-          },
-          {
-            "kind": "vimeo",
-            "src": "https://player.vimeo.com/video/562159482?h=7beb5ffc6c",
             "caption": "VNG Corporation - FX Reel"
           }
         ],
@@ -303,12 +298,21 @@ function buildTimeline() {
       var first = p.m && p.m.length ? p.m[0] : null;
       var vh = '';
       if (first) {
-        vh = '<div class="mview">' + rmedia(first, id, true) + '</div>'
-           + '<div class="mcap" id="' + id + '-c">' + (first.caption || '') + '</div>';
-        if (p.m.length > 1) {
-          vh += '<div class="mthumbs">' + p.m.map(function(m, mi) {
-            return '<div class="mthumb' + (mi === 0 ? ' on' : '') + '" onclick="sm(\'' + id + '\',' + mi + ')" data-src="' + m.src + '" data-kind="' + m.kind + '" data-cap="' + (m.caption || '') + '">' + rmedia(m, id, false) + '</div>';
-          }).join('') + '</div>';
+        var allEmbed = p.m.every(function(m){ return m.kind==='vimeo'||m.kind==='youtube'; });
+        if (allEmbed && p.m.length > 1) {
+          // Stack all videos vertically
+          vh = p.m.map(function(m) {
+            return '<div class="mview"><iframe src="' + m.src + '" style="width:100%;height:360px;border:none;display:block;" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>'
+              + '<div class="mcap">' + (m.caption || '') + '</div>';
+          }).join('');
+        } else {
+          vh = '<div class="mview">' + rmedia(first, id, true) + '</div>'
+             + '<div class="mcap" id="' + id + '-c">' + (first.caption || '') + '</div>';
+          if (p.m.length > 1) {
+            vh += '<div class="mthumbs">' + p.m.map(function(m, mi) {
+              return '<div class="mthumb' + (mi === 0 ? ' on' : '') + '" onclick="sm(\'' + id + '\',' + mi + ')" data-src="' + m.src + '" data-kind="' + m.kind + '" data-cap="' + (m.caption || '') + '">' + rmedia(m, id, false) + '</div>';
+            }).join('') + '</div>';
+          }
         }
       }
       return '<div class="card" id="' + id + '">'
@@ -341,17 +345,4 @@ function sm(cid, idx) {
   } else if (kind === 'img') {
     if (v.tagName !== 'IMG') { var im = document.createElement('img'); im.id = cid + '-v'; im.style = 'width:100%;max-height:360px;object-fit:contain;display:block;'; v.replaceWith(im); v = im; }
     v.src = src;
-  } else {
-    if (v.tagName !== 'VIDEO') { var vd = document.createElement('video'); vd.id = cid + '-v'; vd.controls = true; vd.style = 'width:100%;max-height:360px;display:block;'; v.replaceWith(vd); v = vd; }
-    v.src = src; v.load();
   }
-  var c = document.getElementById(cid + '-c');
-  if (c) c.textContent = cap;
-}
-
-buildNav();
-buildTimeline();
-
-</script>
-</body>
-</html>
