@@ -1,107 +1,352 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Triet Do Minh - Realtime FX Artist</title>
-<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}:root{--bg:#0e0e10;--sf:#18181b;--b:rgba(255,255,255,0.08);--bh:rgba(255,255,255,0.16);--t:#f4f4f5;--m:#a1a1aa;--h:#52525b;--ac:#7F77DD;--abg:rgba(127,119,221,0.12);--at:#afa9ec;--gbg:rgba(29,158,117,0.12);--gt:#5dcaa5;--obg:rgba(186,117,23,0.12);--ot:#ef9f27;--rbg:rgba(153,60,29,0.12);--rt:#f0997b;--r:12px;--rs:8px}html{scroll-behavior:smooth}body{background:var(--bg);color:var(--t);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:15px;line-height:1.6;min-height:100vh}.wrap{max-width:740px;margin:0 auto;padding:0 24px}.hero{padding:64px 0 48px;border-bottom:.5px solid var(--b);margin-bottom:48px}.tag{display:inline-block;font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--at);background:var(--abg);padding:4px 10px;border-radius:99px;margin-bottom:20px}h1{font-size:32px;font-weight:600;line-height:1.2;margin-bottom:8px;letter-spacing:-.02em}h1 span{color:var(--m);font-weight:400}.bio{font-size:15px;color:var(--m);line-height:1.75;max-width:560px;margin-bottom:24px}.contacts{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:28px}.contact{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--m);text-decoration:none;border:.5px solid var(--b);padding:5px 12px;border-radius:99px;transition:border-color .15s}.contact:hover{border-color:var(--bh);color:var(--t)}.skills{display:flex;flex-wrap:wrap;gap:8px}.skill{font-size:12px;padding:4px 12px;border-radius:99px;border:.5px solid var(--bh);color:var(--m)}.slabel{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--h);margin-bottom:16px}.ynav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:40px;position:sticky;top:0;background:var(--bg);padding:12px 0;z-index:10;border-bottom:.5px solid var(--b)}.ybtn{font-size:13px;font-weight:500;padding:6px 16px;border-radius:99px;border:.5px solid var(--bh);background:transparent;color:var(--m);cursor:pointer;transition:all .15s}.ybtn:hover{background:var(--sf);color:var(--t)}.ybtn.on{background:var(--t);color:var(--bg);border-color:var(--t)}.ysec{margin-bottom:56px;scroll-margin-top:64px}.yhead{display:flex;align-items:center;gap:16px;margin-bottom:20px}.ynum{font-size:20px;font-weight:600;color:var(--t)}.yline{flex:1;height:.5px;background:var(--b)}.ycnt{font-size:12px;color:var(--h)}.plist{display:flex;flex-direction:column;gap:10px}.card{background:var(--sf);border:.5px solid var(--b);border-radius:var(--r);overflow:hidden;transition:border-color .15s}.card:hover{border-color:var(--bh)}.phead{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;cursor:pointer;user-select:none}.pname{font-size:15px;font-weight:500;color:var(--t);margin-bottom:3px}.psub{font-size:12px;color:var(--h)}.badge{font-size:11px;padding:3px 9px;border-radius:99px;white-space:nowrap;flex-shrink:0}.job{background:var(--gbg);color:var(--gt)}.tool{background:var(--obg);color:var(--ot)}.vfx{background:var(--abg);color:var(--at)}.web3{background:var(--rbg);color:var(--rt)}.arr{font-size:12px;color:var(--h);flex-shrink:0;transition:transform .25s;margin-left:4px}.card.open .arr{transform:rotate(180deg)}.pbody{display:none;border-top:.5px solid var(--b)}.card.open .pbody{display:block}.mview{background:#111}.mview img,.mview video{width:100%;max-height:360px;object-fit:contain;display:block}.mview iframe{width:100%;height:360px;border:none;display:block}.mcap{font-size:11px;color:var(--h);padding:8px 20px;text-align:center;border-bottom:.5px solid var(--b)}.mthumbs{display:flex;gap:8px;padding:12px 20px;overflow-x:auto;scrollbar-width:none;border-bottom:.5px solid var(--b)}.mthumbs::-webkit-scrollbar{display:none}.mthumb{flex-shrink:0;width:100px;height:60px;border-radius:var(--rs);overflow:hidden;border:1.5px solid transparent;cursor:pointer;background:#111}.mthumb img,.mthumb video{width:100%;height:100%;object-fit:cover;display:block}.mthumb.on{border-color:var(--ac)}.ptext{padding:20px;font-size:14px;color:var(--m);line-height:1.75}.ptext h3{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--h);margin:20px 0 8px}.ptext h3:first-child{margin-top:0}.ptext p{margin-bottom:10px}.ptext ul{padding-left:20px;margin-bottom:10px}.ptext li{margin-bottom:6px}.ptext strong{color:var(--t);font-weight:500}.ptags{display:flex;flex-wrap:wrap;gap:6px;padding:0 20px 20px}.ptag{font-size:11px;padding:3px 9px;border-radius:4px;background:rgba(255,255,255,.05);color:var(--h);border:.5px solid var(--b)}footer{border-top:.5px solid var(--b);padding:40px 0;margin-top:40px;text-align:center;color:var(--h);font-size:13px}footer a{color:var(--at);text-decoration:none}footer a:hover{text-decoration:underline}@media(max-width:480px){h1{font-size:24px}.phead{padding:14px 16px}.ptext{padding:16px}.ptags{padding:0 16px 16px}}</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Triet Do Minh - Realtime FX Artist</title>
+  <style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0e0e10; --sf: #18181b;
+  --b: rgba(255,255,255,0.08); --bh: rgba(255,255,255,0.16);
+  --t: #f4f4f5; --m: #a1a1aa; --h: #52525b;
+  --ac: #7F77DD; --abg: rgba(127,119,221,0.12); --at: #afa9ec;
+  --gbg: rgba(29,158,117,0.12); --gt: #5dcaa5;
+  --obg: rgba(186,117,23,0.12); --ot: #ef9f27;
+  --rbg: rgba(153,60,29,0.12); --rt: #f0997b;
+  --r: 12px; --rs: 8px;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--t); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 15px; line-height: 1.6; min-height: 100vh; }
+.wrap { max-width: 740px; margin: 0 auto; padding: 0 24px; }
+.hero { padding: 64px 0 48px; border-bottom: 0.5px solid var(--b); margin-bottom: 48px; }
+.tag { display: inline-block; font-size: 11px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--at); background: var(--abg); padding: 4px 10px; border-radius: 99px; margin-bottom: 20px; }
+h1 { font-size: 32px; font-weight: 600; line-height: 1.2; margin-bottom: 8px; letter-spacing: -.02em; }
+h1 span { color: var(--m); font-weight: 400; }
+.bio { font-size: 15px; color: var(--m); line-height: 1.75; max-width: 560px; margin-bottom: 24px; }
+.contacts { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 28px; }
+.contact { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--m); text-decoration: none; border: 0.5px solid var(--b); padding: 5px 12px; border-radius: 99px; transition: border-color .15s; }
+.contact:hover { border-color: var(--bh); color: var(--t); }
+.skills { display: flex; flex-wrap: wrap; gap: 8px; }
+.skill { font-size: 12px; padding: 4px 12px; border-radius: 99px; border: 0.5px solid var(--bh); color: var(--m); }
+.slabel { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--h); margin-bottom: 16px; }
+.ynav { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 40px; position: sticky; top: 0; background: var(--bg); padding: 12px 0; z-index: 10; border-bottom: 0.5px solid var(--b); }
+.ybtn { font-size: 13px; font-weight: 500; padding: 6px 16px; border-radius: 99px; border: 0.5px solid var(--bh); background: transparent; color: var(--m); cursor: pointer; transition: all .15s; }
+.ybtn:hover { background: var(--sf); color: var(--t); }
+.ybtn.on { background: var(--t); color: var(--bg); border-color: var(--t); }
+.ysec { margin-bottom: 56px; scroll-margin-top: 64px; }
+.yhead { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+.ynum { font-size: 20px; font-weight: 600; color: var(--t); }
+.yline { flex: 1; height: 0.5px; background: var(--b); }
+.ycnt { font-size: 12px; color: var(--h); }
+.plist { display: flex; flex-direction: column; gap: 10px; }
+.card { background: var(--sf); border: 0.5px solid var(--b); border-radius: var(--r); overflow: hidden; transition: border-color .15s; }
+.card:hover { border-color: var(--bh); }
+.phead { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 20px; cursor: pointer; user-select: none; }
+.pname { font-size: 15px; font-weight: 500; color: var(--t); margin-bottom: 3px; }
+.psub { font-size: 12px; color: var(--h); }
+.badge { font-size: 11px; padding: 3px 9px; border-radius: 99px; white-space: nowrap; flex-shrink: 0; }
+.job  { background: var(--gbg); color: var(--gt); }
+.tool { background: var(--obg); color: var(--ot); }
+.vfx  { background: var(--abg); color: var(--at); }
+.web3 { background: var(--rbg); color: var(--rt); }
+.arr { font-size: 12px; color: var(--h); flex-shrink: 0; transition: transform .25s; margin-left: 4px; }
+.card.open .arr { transform: rotate(180deg); }
+.pbody { display: none; border-top: 0.5px solid var(--b); }
+.card.open .pbody { display: block; }
+.mview { background: #111; }
+.mview img, .mview video { width: 100%; max-height: 360px; object-fit: contain; display: block; }
+.mview iframe { width: 100%; height: 360px; border: none; display: block; }
+.mcap { font-size: 11px; color: var(--h); padding: 8px 20px; text-align: center; border-bottom: 0.5px solid var(--b); }
+.mthumbs { display: flex; gap: 8px; padding: 12px 20px; overflow-x: auto; scrollbar-width: none; border-bottom: 0.5px solid var(--b); }
+.mthumbs::-webkit-scrollbar { display: none; }
+.mthumb { flex-shrink: 0; width: 100px; height: 60px; border-radius: var(--rs); overflow: hidden; border: 1.5px solid transparent; cursor: pointer; background: #111; }
+.mthumb img, .mthumb video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.mthumb.on { border-color: var(--ac); }
+.ptext { padding: 20px; font-size: 14px; color: var(--m); line-height: 1.75; }
+.ptext h3 { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--h); margin: 20px 0 8px; }
+.ptext h3:first-child { margin-top: 0; }
+.ptext p { margin-bottom: 10px; }
+.ptext ul { padding-left: 20px; margin-bottom: 10px; }
+.ptext li { margin-bottom: 6px; }
+.ptext strong { color: var(--t); font-weight: 500; }
+.ptags { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 20px 20px; }
+.ptag { font-size: 11px; padding: 3px 9px; border-radius: 4px; background: rgba(255,255,255,.05); color: var(--h); border: 0.5px solid var(--b); }
+footer { border-top: 0.5px solid var(--b); padding: 40px 0; margin-top: 40px; text-align: center; color: var(--h); font-size: 13px; }
+footer a { color: var(--at); text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+@media (max-width: 480px) { h1 { font-size: 24px; } .phead { padding: 14px 16px; } .ptext { padding: 16px; } .ptags { padding: 0 16px 16px; } }
+  </style>
 </head>
 <body>
 <div class="wrap">
-<section class="hero">
-  <span class="tag">Realtime FX Artist</span>
-  <h1>Triet Do Minh <span>/ 15 years in game industry</span></h1>
-  <p class="bio">FX Artist with 15 years of experience in the gaming industry and 6+ years creating special effects — explosions, destruction, and game effects using particle systems, custom shaders, Houdini, and Unity. Currently deepening skills in custom lighting, shader writing, and C# integration. Actively leveraging AI tools to build custom Unity Editor tooling that accelerates VFX workflows — automating repetitive pipeline tasks and reducing manual overhead so more time goes into the actual craft.</p>
-  <div class="contacts">
-    <a class="contact" href="mailto:minte131@gmail.com">&#9993; minte131@gmail.com</a>
-    <a class="contact" href="https://linkedin.com/in/do-minh-triet-688b4994/" target="_blank">in LinkedIn</a>
-    <a class="contact" href="https://www.artstation.com/minte131" target="_blank">&#9671; ArtStation</a>
-    <a class="contact" href="https://trietvfx.dev">&#11042; trietvfx.dev</a>
-  </div>
-  <div class="skills">
-    <span class="skill">Unity URP</span><span class="skill">HLSL / ShaderLab</span><span class="skill">VFX Graph</span>
-    <span class="skill">Houdini</span><span class="skill">Unreal Engine</span><span class="skill">Particle Systems</span>
-    <span class="skill">SSS Shader</span><span class="skill">PBR Lit Shader</span><span class="skill">Substance Designer</span>
-    <span class="skill">Photoshop</span><span class="skill">Editor Scripting C#</span><span class="skill">2D Animation</span>
-  </div>
-</section>
-<div class="slabel">Timeline</div>
-<nav class="ynav" id="ynav"></nav>
-<div id="tc"></div>
-<footer><p>trietvfx.dev &nbsp;&middot;&nbsp; <a href="mailto:minte131@gmail.com">minte131@gmail.com</a></p></footer>
+
+  <section class="hero">
+    <span class="tag">Realtime FX Artist</span>
+    <h1>Triet Do Minh <span>/ 15 years in game industry</span></h1>
+    <p class="bio">FX Artist with 15 years of experience in the gaming industry and 6+ years creating special effects — explosions, destruction, and game effects using particle systems, custom shaders, Houdini, and Unity. Currently deepening skills in custom lighting, shader writing, and C# integration. Actively leveraging AI tools to build custom Unity Editor tooling that accelerates VFX workflows — automating repetitive pipeline tasks and reducing manual overhead so more time goes into the actual craft.</p>
+    <div class="contacts">
+      <a class="contact" href="mailto:minte131@gmail.com">&#9993; minte131@gmail.com</a>
+      <a class="contact" href="https://linkedin.com/in/do-minh-triet-688b4994/" target="_blank">in LinkedIn</a>
+      <a class="contact" href="https://www.artstation.com/minte131" target="_blank">&#9671; ArtStation</a>
+      <a class="contact" href="https://trietvfx.dev">&#11042; trietvfx.dev</a>
+    </div>
+    <div class="skills">
+      <span class="skill">Unity URP</span>
+      <span class="skill">HLSL / ShaderLab</span>
+      <span class="skill">VFX Graph</span>
+      <span class="skill">Houdini</span>
+      <span class="skill">Unreal Engine</span>
+      <span class="skill">Particle Systems</span>
+      <span class="skill">SSS Shader</span>
+      <span class="skill">PBR Lit Shader</span>
+      <span class="skill">Substance Designer</span>
+      <span class="skill">Photoshop</span>
+      <span class="skill">Editor Scripting C#</span>
+      <span class="skill">2D Animation</span>
+    </div>
+  </section>
+
+  <div class="slabel">Timeline</div>
+  <nav class="ynav" id="ynav"></nav>
+  <div id="tc"></div>
+
+  <footer>
+    <p>trietvfx.dev &nbsp;&middot;&nbsp; <a href="mailto:minte131@gmail.com">minte131@gmail.com</a></p>
+  </footer>
+
 </div>
 <script>
-var D=[{"y":"2022-2024","p":[{"n":"Electric Square Singapore - FX Artist","s":"Parallel: A Sci-Fi Card Game","c":"job","l":"Job","m":[],"x":"<h3>Company</h3><p>Electric Square Singapore - working on <strong>Parallel</strong>, a sci-fi card game.</p><h3>Responsibilities</h3><ul><li>Special effects for each card type in sci-fi style</li><li>Shaders for Paragons: <strong>SSS shader</strong>, eye shader, hair shader, <strong>PBR Lit shader</strong> with custom lighting</li><li>Transition shaders when user selects a Paragon</li><li>Card shaders using Unlit shader with custom lighting</li><li>Special effects for rare card types</li><li>Prototype effects using <strong>VFX Graph</strong></li><li>Optimize effects based on engine profiler</li><li>Mentor new FX artists on Unity pipeline</li></ul>","t":["Unity","VFX Graph","SSS Shader","PBR","Custom Lighting","Unlit Shader","Optimization"]},{"n":"AI Animation Pipeline","s":"Auto-rig 2D sprites with Anthropic Vision API","c":"tool","l":"Tool","m":[],"x":"<h3>Overview</h3><p>Unity Editor tool using the Anthropic Vision API to analyze 2D sprite sheets and auto-generate bone rigs and animation clips.</p><h3>Pipeline</h3><ul><li><strong>Import</strong> - drag in PSD or PNG</li><li><strong>Layout</strong> - auto-slice parts</li><li><strong>AI Rig</strong> - Vision API identifies joints</li><li><strong>Review</strong> - artist tweaks bones</li><li><strong>Generate</strong> - outputs .anim and AnimatorController</li></ul>","t":["Editor Scripting","Anthropic API","AnimatorController","AI","2D Animation"]},{"n":"Texture Creator FX","s":"Procedural texture generator - 115 shader types","c":"tool","l":"Tool","m":[],"x":"<h3>Overview</h3><p>GPU-driven procedural texture generator inside Unity Editor. 115 HLSL shader types with real-time preview, GPU post-effects, PNG/EXR export.</p>","t":["HLSL","GPU","Editor GUI","Procedural","Unity"]}]},{"y":"2019-2021","p":[{"n":"VNG Corporation - FX Artist","s":"Dead Target / Zombie Hunter / Sniper Zombie","c":"job","l":"Job","m":[{"kind":"vimeo","src":"https://player.vimeo.com/video/949023837?h=84a682c875","caption":"VNG Corporation - FX Reel"}],"x":"<h3>Games</h3><ul><li><strong>Dead Target</strong></li><li><strong>Zombie Hunter</strong></li><li><strong>Sniper Zombie</strong></li></ul><h3>Responsibilities</h3><ul><li>In-game effects: blood, muzzle flash, last shot, UI motion, UI effects</li><li>Custom shaders and shader optimization for mobile</li></ul><h3>Notable</h3><p>VFX Artist on <strong>Justin Bieber VR Music Concept</strong> for Future House Studio - VFX Graph effects, Houdini fracture assets, lightning shapes, ground destruction.</p>","t":["Unity","VFX Graph","Houdini","Mobile Optimization","Custom Shader","VR"]}]},{"y":"2018-2019","p":[{"n":"Virtuous Viet Nam (Sparx*) - FX Artist","s":"Age of Empires / Lego Star Wars","c":"job","l":"Job","m":[],"x":"<h3>Responsibilities</h3><ul><li>Destruction effects for <strong>Age of Empires</strong> (castle, market, house) using Houdini</li><li>Cloth simulation for <strong>Lego Star Wars</strong></li></ul>","t":["Houdini","Destruction FX","Cloth Simulation","Age of Empires","Lego Star Wars"]}]},{"y":"2010-2018","p":[{"n":"568e - Video Editor","s":"Game trailers, video ads, 2D animation","c":"job","l":"Job","m":[],"x":"<h3>Responsibilities</h3><ul><li>Creating videos for game trailers and video ads</li><li>2D animation for in-game loading screens and websites</li></ul>","t":["Video Editing","2D Animation","Game Trailer","Motion Graphics"]}]},{"y":"2009","p":[{"n":"VNG Corporation - Game Tester","s":"QA for patches and events","c":"job","l":"Job","m":[],"x":"<h3>Responsibilities</h3><ul><li>Test new patches and events before publishing</li></ul>","t":["QA","Game Testing","VNG"]}]}];
-function sid(y){return y.replace(/[^a-z0-9]/gi,'_')}
-function buildNav(){
-  var nav=document.getElementById('ynav');
-  D.forEach(function(y,i){
-    var b=document.createElement('button');
-    b.className='ybtn'+(i===0?' on':'');
-    b.textContent=y.y;
-    b.onclick=function(){
-      document.querySelectorAll('.ybtn').forEach(function(x){x.classList.remove('on')});
+
+var D = [
+  {
+    "y": "2022-2024",
+    "p": [
+      {
+        "n": "Electric Square Singapore - FX Artist",
+        "s": "Parallel: A Sci-Fi Card Game",
+        "c": "job",
+        "l": "Job",
+        "m": [],
+        "x": "<h3>Company</h3><p>Electric Square Singapore - working on <strong>Parallel</strong>, a sci-fi card game.</p><h3>Responsibilities</h3><ul><li>Special effects for each card type in sci-fi style</li><li>Shaders for Paragons: <strong>SSS shader</strong>, eye shader, hair shader, <strong>PBR Lit shader</strong> with custom lighting</li><li>Transition shaders when user selects a Paragon</li><li>Card shaders using Unlit shader with custom lighting</li><li>Special effects for rare card types</li><li>Prototype effects using <strong>VFX Graph</strong></li><li>Optimize effects based on engine profiler</li><li>Mentor new FX artists on Unity pipeline</li></ul>",
+        "t": [
+          "Unity",
+          "VFX Graph",
+          "SSS Shader",
+          "PBR",
+          "Custom Lighting",
+          "Unlit Shader",
+          "Optimization"
+        ]
+      },
+      {
+        "n": "AI Animation Pipeline",
+        "s": "Auto-rig 2D sprites with Anthropic Vision API",
+        "c": "tool",
+        "l": "Tool",
+        "m": [],
+        "x": "<h3>Overview</h3><p>Unity Editor tool using the Anthropic Vision API to analyze 2D sprite sheets and auto-generate bone rigs and animation clips.</p><h3>Pipeline</h3><ul><li><strong>Import</strong> - drag in PSD or PNG</li><li><strong>Layout</strong> - auto-slice parts</li><li><strong>AI Rig</strong> - Vision API identifies joints</li><li><strong>Review</strong> - artist tweaks bones</li><li><strong>Generate</strong> - outputs .anim and AnimatorController</li></ul>",
+        "t": [
+          "Editor Scripting",
+          "Anthropic API",
+          "AnimatorController",
+          "AI",
+          "2D Animation"
+        ]
+      },
+      {
+        "n": "Texture Creator FX",
+        "s": "Procedural texture generator - 115 shader types",
+        "c": "tool",
+        "l": "Tool",
+        "m": [],
+        "x": "<h3>Overview</h3><p>GPU-driven procedural texture generator inside Unity Editor. 115 HLSL shader types with real-time preview, GPU post-effects, PNG/EXR export.</p>",
+        "t": [
+          "HLSL",
+          "GPU",
+          "Editor GUI",
+          "Procedural",
+          "Unity"
+        ]
+      }
+    ]
+  },
+  {
+    "y": "2019-2021",
+    "p": [
+      {
+        "n": "VNG Corporation - FX Artist",
+        "s": "Dead Target / Zombie Hunter / Sniper Zombie",
+        "c": "job",
+        "l": "Job",
+        "m": [
+          {
+            "kind": "vimeo",
+            "src": "https://player.vimeo.com/video/949023837?h=84a682c875",
+            "caption": "VNG Corporation - FX Reel"
+          }
+        ],
+        "x": "<h3>Games</h3><ul><li><strong>Dead Target</strong></li><li><strong>Zombie Hunter</strong></li><li><strong>Sniper Zombie</strong></li></ul><h3>Responsibilities</h3><ul><li>In-game effects: blood, muzzle flash, last shot, UI motion, UI effects</li><li>Custom shaders and shader optimization for mobile</li></ul><h3>Notable</h3><p>VFX Artist on <strong>Justin Bieber VR Music Concept</strong> for Future House Studio - VFX Graph effects, Houdini fracture assets, lightning shapes, ground destruction.</p>",
+        "t": [
+          "Unity",
+          "VFX Graph",
+          "Houdini",
+          "Mobile Optimization",
+          "Custom Shader",
+          "VR"
+        ]
+      }
+    ]
+  },
+  {
+    "y": "2018-2019",
+    "p": [
+      {
+        "n": "Virtuous Viet Nam (Sparx*) - FX Artist",
+        "s": "Age of Empires / Lego Star Wars",
+        "c": "job",
+        "l": "Job",
+        "m": [],
+        "x": "<h3>Responsibilities</h3><ul><li>Destruction effects for <strong>Age of Empires</strong> (castle, market, house) using Houdini</li><li>Cloth simulation for <strong>Lego Star Wars</strong></li></ul>",
+        "t": [
+          "Houdini",
+          "Destruction FX",
+          "Cloth Simulation",
+          "Age of Empires",
+          "Lego Star Wars"
+        ]
+      }
+    ]
+  },
+  {
+    "y": "2010-2018",
+    "p": [
+      {
+        "n": "568e - Video Editor",
+        "s": "Game trailers, video ads, 2D animation",
+        "c": "job",
+        "l": "Job",
+        "m": [],
+        "x": "<h3>Responsibilities</h3><ul><li>Creating videos for game trailers and video ads</li><li>2D animation for in-game loading screens and websites</li></ul>",
+        "t": [
+          "Video Editing",
+          "2D Animation",
+          "Game Trailer",
+          "Motion Graphics"
+        ]
+      }
+    ]
+  },
+  {
+    "y": "2009",
+    "p": [
+      {
+        "n": "VNG Corporation - Game Tester",
+        "s": "QA for patches and events",
+        "c": "job",
+        "l": "Job",
+        "m": [],
+        "x": "<h3>Responsibilities</h3><ul><li>Test new patches and events before publishing</li></ul>",
+        "t": [
+          "QA",
+          "Game Testing",
+          "VNG"
+        ]
+      }
+    ]
+  }
+];
+
+function sid(y) { return y.replace(/[^a-z0-9]/gi, '_'); }
+
+function buildNav() {
+  var nav = document.getElementById('ynav');
+  D.forEach(function(y, i) {
+    var b = document.createElement('button');
+    b.className = 'ybtn' + (i === 0 ? ' on' : '');
+    b.textContent = y.y;
+    b.onclick = function() {
+      document.querySelectorAll('.ybtn').forEach(function(x) { x.classList.remove('on'); });
       b.classList.add('on');
-      var el=document.getElementById('ys-'+sid(y.y));
-      if(el)el.scrollIntoView({behavior:'smooth'});
+      var el = document.getElementById('ys-' + sid(y.y));
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
     };
     nav.appendChild(b);
   });
 }
-function rmedia(m,vid,main){
-  if(m.kind==='img')return '<img '+(main?'id="'+vid+'-v" style="width:100%;max-height:360px;object-fit:contain;display:block;"':'loading="lazy"')+' src="'+m.src+'" />';
-  if(m.kind==='video')return '<video '+(main?'id="'+vid+'-v" controls style="width:100%;max-height:360px;display:block;"':'muted preload="metadata"')+' src="'+m.src+'"></video>';
-  if(m.kind==='vimeo'||m.kind==='youtube'){
-    if(main)return '<iframe id="'+vid+'-v" src="'+m.src+'" style="width:100%;height:360px;border:none;display:block;" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
+
+function rmedia(m, vid, main) {
+  if (m.kind === 'img')
+    return '<img ' + (main ? 'id="' + vid + '-v" style="width:100%;max-height:360px;object-fit:contain;display:block;"' : 'loading="lazy"') + ' src="' + m.src + '" />';
+  if (m.kind === 'video')
+    return '<video ' + (main ? 'id="' + vid + '-v" controls style="width:100%;max-height:360px;display:block;"' : 'muted preload="metadata"') + ' src="' + m.src + '"></video>';
+  if (m.kind === 'vimeo' || m.kind === 'youtube') {
+    if (main) return '<iframe id="' + vid + '-v" src="' + m.src + '" style="width:100%;height:360px;border:none;display:block;" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
     return '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#222;color:#aaa;font-size:22px;">&#9654;</div>';
   }
   return '';
 }
-function buildTimeline(){
-  var tc=document.getElementById('tc');
-  D.forEach(function(y){
-    var sec=document.createElement('div');
-    sec.className='ysec';
-    sec.id='ys-'+sid(y.y);
-    var ph=y.p.map(function(p,i){
-      var id='p'+sid(y.y)+'_'+i;
-      var first=p.m&&p.m.length?p.m[0]:null;
-      var vh='';
-      if(first){
-        vh='<div class="mview">'+rmedia(first,id,true)+'</div><div class="mcap" id="'+id+'-c">'+(first.caption||'')+'</div>';
-        if(p.m.length>1){
-          vh+='<div class="mthumbs">'+p.m.map(function(m,mi){
-            return '<div class="mthumb'+(mi===0?' on':'')+'" onclick="sm(\''+id+'\','+mi+')" data-src="'+m.src+'" data-kind="'+m.kind+'" data-cap="'+(m.caption||'')+'">'+rmedia(m,id,false)+'</div>';
-          }).join('')+'</div>';
+
+function buildTimeline() {
+  var tc = document.getElementById('tc');
+  D.forEach(function(y) {
+    var sec = document.createElement('div');
+    sec.className = 'ysec';
+    sec.id = 'ys-' + sid(y.y);
+    var ph = y.p.map(function(p, i) {
+      var id = 'p' + sid(y.y) + '_' + i;
+      var first = p.m && p.m.length ? p.m[0] : null;
+      var vh = '';
+      if (first) {
+        vh = '<div class="mview">' + rmedia(first, id, true) + '</div>'
+           + '<div class="mcap" id="' + id + '-c">' + (first.caption || '') + '</div>';
+        if (p.m.length > 1) {
+          vh += '<div class="mthumbs">' + p.m.map(function(m, mi) {
+            return '<div class="mthumb' + (mi === 0 ? ' on' : '') + '" onclick="sm(\'' + id + '\',' + mi + ')" data-src="' + m.src + '" data-kind="' + m.kind + '" data-cap="' + (m.caption || '') + '">' + rmedia(m, id, false) + '</div>';
+          }).join('') + '</div>';
         }
       }
-      return '<div class="card" id="'+id+'"><div class="phead" onclick="tog(\''+id+'\')"><div><div class="pname">'+p.n+'</div><div class="psub">'+(p.s||'')+'</div></div><div style="display:flex;align-items:center;gap:8px;flex-shrink:0"><span class="badge '+p.c+'">'+p.l+'</span><span class="arr">&#9662;</span></div></div><div class="pbody">'+vh+'<div class="ptext">'+p.x+'</div><div class="ptags">'+p.t.map(function(t){return '<span class="ptag">'+t+'</span>';}).join('')+'</div></div></div>';
+      return '<div class="card" id="' + id + '">'
+        + '<div class="phead" onclick="tog(\'' + id + '\')">'
+        + '<div><div class="pname">' + p.n + '</div><div class="psub">' + (p.s || '') + '</div></div>'
+        + '<div style="display:flex;align-items:center;gap:8px;flex-shrink:0">'
+        + '<span class="badge ' + p.c + '">' + p.l + '</span>'
+        + '<span class="arr">&#9662;</span></div></div>'
+        + '<div class="pbody">' + vh
+        + '<div class="ptext">' + p.x + '</div>'
+        + '<div class="ptags">' + p.t.map(function(t) { return '<span class="ptag">' + t + '</span>'; }).join('') + '</div>'
+        + '</div></div>';
     }).join('');
-    sec.innerHTML='<div class="yhead"><span class="ynum">'+y.y+'</span><div class="yline"></div><span class="ycnt">'+y.p.length+' project'+(y.p.length!==1?'s':'')+'</span></div><div class="plist">'+ph+'</div>';
+    sec.innerHTML = '<div class="yhead"><span class="ynum">' + y.y + '</span><div class="yline"></div><span class="ycnt">' + y.p.length + ' project' + (y.p.length !== 1 ? 's' : '') + '</span></div><div class="plist">' + ph + '</div>';
     tc.appendChild(sec);
   });
 }
-function tog(id){document.getElementById(id).classList.toggle('open')}
-function sm(cid,idx){
-  var card=document.getElementById(cid);
-  card.querySelectorAll('.mthumb').forEach(function(t,i){t.classList.toggle('on',i===idx)});
-  var th=card.querySelectorAll('.mthumb')[idx];
-  var kind=th.dataset.kind,src=th.dataset.src,cap=th.dataset.cap||'';
-  var v=document.getElementById(cid+'-v');
-  if(kind==='vimeo'||kind==='youtube'){
-    if(v.tagName!=='IFRAME'){var f=document.createElement('iframe');f.id=cid+'-v';f.style='width:100%;height:360px;border:none;display:block;';f.allow='autoplay; fullscreen; picture-in-picture';f.allowFullscreen=true;v.replaceWith(f);v=f;}
-    v.src=src;
-  }else if(kind==='img'){
-    if(v.tagName!=='IMG'){var im=document.createElement('img');im.id=cid+'-v';im.style='width:100%;max-height:360px;object-fit:contain;display:block;';v.replaceWith(im);v=im;}
-    v.src=src;
-  }else{
-    if(v.tagName!=='VIDEO'){var vd=document.createElement('video');vd.id=cid+'-v';vd.controls=true;vd.style='width:100%;max-height:360px;display:block;';v.replaceWith(vd);v=vd;}
-    v.src=src;v.load();
+
+function tog(id) { document.getElementById(id).classList.toggle('open'); }
+
+function sm(cid, idx) {
+  var card = document.getElementById(cid);
+  card.querySelectorAll('.mthumb').forEach(function(t, i) { t.classList.toggle('on', i === idx); });
+  var th = card.querySelectorAll('.mthumb')[idx];
+  var kind = th.dataset.kind, src = th.dataset.src, cap = th.dataset.cap || '';
+  var v = document.getElementById(cid + '-v');
+  if (kind === 'vimeo' || kind === 'youtube') {
+    if (v.tagName !== 'IFRAME') { var f = document.createElement('iframe'); f.id = cid + '-v'; f.style = 'width:100%;height:360px;border:none;display:block;'; f.allow = 'autoplay; fullscreen; picture-in-picture'; f.allowFullscreen = true; v.replaceWith(f); v = f; }
+    v.src = src;
+  } else if (kind === 'img') {
+    if (v.tagName !== 'IMG') { var im = document.createElement('img'); im.id = cid + '-v'; im.style = 'width:100%;max-height:360px;object-fit:contain;display:block;'; v.replaceWith(im); v = im; }
+    v.src = src;
+  } else {
+    if (v.tagName !== 'VIDEO') { var vd = document.createElement('video'); vd.id = cid + '-v'; vd.controls = true; vd.style = 'width:100%;max-height:360px;display:block;'; v.replaceWith(vd); v = vd; }
+    v.src = src; v.load();
   }
-  var c=document.getElementById(cid+'-c');
-  if(c)c.textContent=cap;
+  var c = document.getElementById(cid + '-c');
+  if (c) c.textContent = cap;
 }
-buildNav();buildTimeline();
+
+buildNav();
+buildTimeline();
+
 </script>
 </body>
 </html>
