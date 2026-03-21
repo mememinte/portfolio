@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Triết — Game Dev & VFX Artist</title>
+<title>Triet Do Minh — Realtime FX Artist</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -27,12 +27,13 @@
     --red: #993C1D;
     --red-bg: rgba(153,60,29,0.12);
     --red-text: #f0997b;
+    --teal-bg: rgba(29,158,117,0.10);
+    --teal-text: #5dcaa5;
     --radius: 12px;
     --radius-sm: 8px;
   }
 
   html { scroll-behavior: smooth; }
-
   body {
     background: var(--bg);
     color: var(--text);
@@ -42,262 +43,103 @@
     min-height: 100vh;
   }
 
-  .container {
-    max-width: 740px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
+  .container { max-width: 740px; margin: 0 auto; padding: 0 24px; }
 
   /* HERO */
-  .hero {
-    padding: 64px 0 48px;
-    border-bottom: 0.5px solid var(--border);
-    margin-bottom: 48px;
-  }
+  .hero { padding: 64px 0 48px; border-bottom: 0.5px solid var(--border); margin-bottom: 48px; }
   .hero-tag {
-    display: inline-block;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--accent-text);
-    background: var(--accent-bg);
-    padding: 4px 10px;
-    border-radius: 99px;
-    margin-bottom: 20px;
+    display: inline-block; font-size: 11px; font-weight: 500;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--accent-text); background: var(--accent-bg);
+    padding: 4px 10px; border-radius: 99px; margin-bottom: 20px;
   }
-  .hero h1 {
-    font-size: 32px;
-    font-weight: 600;
-    line-height: 1.2;
-    margin-bottom: 16px;
-    letter-spacing: -0.02em;
-  }
+  .hero h1 { font-size: 32px; font-weight: 600; line-height: 1.2; margin-bottom: 8px; letter-spacing: -0.02em; }
   .hero h1 span { color: var(--muted); font-weight: 400; }
-  .hero p {
-    font-size: 15px;
-    color: var(--muted);
-    line-height: 1.75;
-    max-width: 520px;
-    margin-bottom: 28px;
-  }
-  .skills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  .skill {
-    font-size: 12px;
-    padding: 4px 12px;
-    border-radius: 99px;
-    border: 0.5px solid var(--border-hover);
-    color: var(--muted);
-  }
+  .hero-bio { font-size: 15px; color: var(--muted); line-height: 1.75; max-width: 560px; margin-bottom: 24px; }
 
-  /* TIMELINE NAV */
-  .section-label {
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--hint);
-    margin-bottom: 16px;
+  .hero-contacts { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 28px; }
+  .hero-contact {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 13px; color: var(--muted);
+    text-decoration: none; border: 0.5px solid var(--border);
+    padding: 5px 12px; border-radius: 99px; transition: border-color 0.15s;
   }
+  .hero-contact:hover { border-color: var(--border-hover); color: var(--text); }
+
+  .skills { display: flex; flex-wrap: wrap; gap: 8px; }
+  .skill { font-size: 12px; padding: 4px 12px; border-radius: 99px; border: 0.5px solid var(--border-hover); color: var(--muted); }
+
+  /* NAV */
+  .section-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--hint); margin-bottom: 16px; }
   .year-nav {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-bottom: 40px;
-    position: sticky;
-    top: 0;
-    background: var(--bg);
-    padding: 12px 0;
-    z-index: 10;
-    border-bottom: 0.5px solid var(--border);
+    display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 40px;
+    position: sticky; top: 0; background: var(--bg);
+    padding: 12px 0; z-index: 10; border-bottom: 0.5px solid var(--border);
   }
   .year-btn {
-    font-size: 13px;
-    font-weight: 500;
-    padding: 6px 16px;
-    border-radius: 99px;
-    border: 0.5px solid var(--border-hover);
-    background: transparent;
-    color: var(--muted);
-    cursor: pointer;
-    transition: all 0.15s;
+    font-size: 13px; font-weight: 500; padding: 6px 16px; border-radius: 99px;
+    border: 0.5px solid var(--border-hover); background: transparent;
+    color: var(--muted); cursor: pointer; transition: all 0.15s;
   }
   .year-btn:hover { background: var(--surface); color: var(--text); }
   .year-btn.active { background: var(--text); color: var(--bg); border-color: var(--text); }
 
   /* YEAR SECTION */
   .year-section { margin-bottom: 56px; scroll-margin-top: 64px; }
-  .year-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 20px;
-  }
+  .year-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
   .year-number { font-size: 20px; font-weight: 600; color: var(--text); }
   .year-line { flex: 1; height: 0.5px; background: var(--border); }
   .year-count { font-size: 12px; color: var(--hint); }
 
-  /* PROJECT CARD */
+  /* CARD */
   .project-list { display: flex; flex-direction: column; gap: 10px; }
-
   .project-card {
-    background: var(--surface);
-    border: 0.5px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-    transition: border-color 0.15s;
+    background: var(--surface); border: 0.5px solid var(--border);
+    border-radius: var(--radius); overflow: hidden; transition: border-color 0.15s;
   }
   .project-card:hover { border-color: var(--border-hover); }
-
   .project-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    padding: 16px 20px;
-    cursor: pointer;
-    user-select: none;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px; padding: 16px 20px; cursor: pointer; user-select: none;
   }
   .project-name { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
   .project-sub { font-size: 12px; color: var(--hint); }
-
-  .project-type {
-    font-size: 11px;
-    padding: 3px 9px;
-    border-radius: 99px;
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
+  .project-type { font-size: 11px; padding: 3px 9px; border-radius: 99px; white-space: nowrap; flex-shrink: 0; }
   .type-vfx { background: var(--accent-bg); color: var(--accent-text); }
   .type-tool { background: var(--amber-bg); color: var(--amber-text); }
   .type-web3 { background: var(--red-bg); color: var(--red-text); }
   .type-ui { background: var(--green-bg); color: var(--green-text); }
-
-  .toggle-icon {
-    font-size: 12px;
-    color: var(--hint);
-    flex-shrink: 0;
-    transition: transform 0.25s;
-    margin-left: 4px;
-  }
+  .type-job { background: var(--teal-bg); color: var(--teal-text); }
+  .toggle-icon { font-size: 12px; color: var(--hint); flex-shrink: 0; transition: transform 0.25s; margin-left: 4px; }
   .project-card.open .toggle-icon { transform: rotate(180deg); }
 
-  /* PROJECT BODY */
-  .project-body {
-    display: none;
-    border-top: 0.5px solid var(--border);
-  }
+  .project-body { display: none; border-top: 0.5px solid var(--border); }
   .project-card.open .project-body { display: block; }
 
   /* MEDIA */
-  .media-viewer {
-    background: #111;
-    position: relative;
-  }
-  .media-viewer img,
-  .media-viewer video {
-    width: 100%;
-    max-height: 360px;
-    object-fit: contain;
-    display: block;
-  }
-  .media-caption {
-    font-size: 11px;
-    color: var(--hint);
-    padding: 8px 20px;
-    text-align: center;
-    border-bottom: 0.5px solid var(--border);
-  }
-
-  .media-thumbs {
-    display: flex;
-    gap: 8px;
-    padding: 12px 20px;
-    overflow-x: auto;
-    scrollbar-width: none;
-    border-bottom: 0.5px solid var(--border);
-  }
+  .media-viewer { background: #111; }
+  .media-viewer img, .media-viewer video { width: 100%; max-height: 360px; object-fit: contain; display: block; }
+  .media-caption { font-size: 11px; color: var(--hint); padding: 8px 20px; text-align: center; border-bottom: 0.5px solid var(--border); }
+  .media-thumbs { display: flex; gap: 8px; padding: 12px 20px; overflow-x: auto; scrollbar-width: none; border-bottom: 0.5px solid var(--border); }
   .media-thumbs::-webkit-scrollbar { display: none; }
-
-  .media-thumb {
-    flex-shrink: 0;
-    width: 100px;
-    height: 60px;
-    border-radius: var(--radius-sm);
-    overflow: hidden;
-    border: 1.5px solid transparent;
-    cursor: pointer;
-    background: #111;
-    position: relative;
-  }
-  .media-thumb img,
-  .media-thumb video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
+  .media-thumb { flex-shrink: 0; width: 100px; height: 60px; border-radius: var(--radius-sm); overflow: hidden; border: 1.5px solid transparent; cursor: pointer; background: #111; position: relative; }
+  .media-thumb img, .media-thumb video { width: 100%; height: 100%; object-fit: cover; display: block; }
   .media-thumb.active { border-color: var(--accent); }
-  .media-thumb .vid-badge {
-    position: absolute;
-    bottom: 4px;
-    left: 4px;
-    background: rgba(0,0,0,0.6);
-    color: #fff;
-    font-size: 9px;
-    padding: 1px 5px;
-    border-radius: 3px;
-  }
 
-  /* TEXT CONTENT */
-  .project-text {
-    padding: 20px;
-    font-size: 14px;
-    color: var(--muted);
-    line-height: 1.75;
-  }
-  .project-text h3 {
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--hint);
-    margin: 20px 0 8px;
-  }
+  /* TEXT */
+  .project-text { padding: 20px; font-size: 14px; color: var(--muted); line-height: 1.75; }
+  .project-text h3 { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--hint); margin: 20px 0 8px; }
   .project-text h3:first-child { margin-top: 0; }
   .project-text p { margin-bottom: 10px; }
   .project-text ul { padding-left: 20px; margin-bottom: 10px; }
   .project-text li { margin-bottom: 6px; }
   .project-text strong { color: var(--text); font-weight: 500; }
 
-  /* TAGS */
-  .project-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    padding: 0 20px 20px;
-  }
-  .project-tag {
-    font-size: 11px;
-    padding: 3px 9px;
-    border-radius: 4px;
-    background: rgba(255,255,255,0.05);
-    color: var(--hint);
-    border: 0.5px solid var(--border);
-  }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 20px 20px; }
+  .project-tag { font-size: 11px; padding: 3px 9px; border-radius: 4px; background: rgba(255,255,255,0.05); color: var(--hint); border: 0.5px solid var(--border); }
 
   /* FOOTER */
-  footer {
-    border-top: 0.5px solid var(--border);
-    padding: 40px 0;
-    margin-top: 40px;
-    text-align: center;
-    color: var(--hint);
-    font-size: 13px;
-  }
+  footer { border-top: 0.5px solid var(--border); padding: 40px 0; margin-top: 40px; text-align: center; color: var(--hint); font-size: 13px; }
   footer a { color: var(--accent-text); text-decoration: none; }
   footer a:hover { text-decoration: underline; }
 
@@ -312,64 +154,67 @@
 <body>
 <div class="container">
 
-  <!-- HERO -->
   <section class="hero">
-    <span class="hero-tag">Unity Developer & VFX Artist</span>
-    <h1>Triết <span>/ Game Dev & Visual Effects</span></h1>
-    <p>I build real-time visual effects, custom Unity Editor tooling, and Web3-integrated game systems. Focused on shader development, URP pipelines, and AI-assisted workflows.</p>
+    <span class="hero-tag">Realtime FX Artist</span>
+    <h1>Triet Do Minh <span>/ 15 years in game industry</span></h1>
+    <p class="hero-bio">FX Artist with 15 years of experience in the gaming industry and 6+ years creating special effects — explosions, destruction, and game effects using particle systems, custom shaders, Houdini, and Unity. Currently deepening skills in custom lighting, shader writing, and C# integration.</p>
+    <div class="hero-contacts">
+      <a class="hero-contact" href="mailto:minte131@gmail.com">✉ minte131@gmail.com</a>
+      <a class="hero-contact" href="tel:+84949209911">✆ +84.949.209.911</a>
+      <a class="hero-contact" href="https://linkedin.com/in/do-minh-triet-688b4994/" target="_blank">in LinkedIn</a>
+      <a class="hero-contact" href="https://trietvfx.dev">⬡ trietvfx.dev</a>
+    </div>
     <div class="skills">
       <span class="skill">Unity URP</span>
       <span class="skill">HLSL / ShaderLab</span>
       <span class="skill">VFX Graph</span>
-      <span class="skill">Editor Scripting</span>
+      <span class="skill">Houdini</span>
+      <span class="skill">Unreal Engine</span>
+      <span class="skill">Particle Systems</span>
+      <span class="skill">SSS Shader</span>
+      <span class="skill">PBR Lit Shader</span>
+      <span class="skill">Substance Designer</span>
+      <span class="skill">Photoshop</span>
+      <span class="skill">Editor Scripting C#</span>
       <span class="skill">2D Animation</span>
-      <span class="skill">Web3 / JWT</span>
-      <span class="skill">Python / FastAPI</span>
     </div>
   </section>
 
-  <!-- TIMELINE -->
   <div class="section-label">Timeline</div>
   <nav class="year-nav" id="yearNav"></nav>
   <div id="timelineContainer"></div>
 
   <footer>
-    <p>trietvfx.dev &nbsp;·&nbsp; <a href="mailto:hello@trietvfx.dev">hello@trietvfx.dev</a></p>
+    <p>trietvfx.dev &nbsp;·&nbsp; <a href="mailto:minte131@gmail.com">minte131@gmail.com</a></p>
   </footer>
 
 </div>
-
 <script>
-// ─── DATA ───────────────────────────────────────────────────────
-// Để thêm media: { kind: "img", src: "assets/ten-file.gif", caption: "Mô tả" }
-//                { kind: "video", src: "assets/ten-file.mp4", caption: "Mô tả" }
 const data = [
   {
-    year: 2025,
+    year: "2022–2024",
     projects: [
       {
-        name: "Oil Painting VFX — Unity URP",
-        sub: "Stylized post-processing effect",
-        type: "vfx", label: "VFX",
-        media: [
-          // Thay src bằng đường dẫn ảnh/gif/video thật của bạn
-          // { kind: "img", src: "assets/oil-paint-preview.gif", caption: "Final effect on 3D scene" },
-          // { kind: "video", src: "assets/oil-paint-demo.mp4", caption: "Real-time demo" },
-        ],
+        name: "Electric Square Singapore — FX Artist",
+        sub: "Parallel: A Sci-Fi Card Game",
+        type: "job", label: "Job",
+        media: [],
         content: `
-          <h3>Overview</h3>
-          <p>Stylized oil painting post-processing effect for Unity URP, targeting both 3D objects and 2D sprites. Makes real-time scenes feel like hand-painted artwork without baking textures.</p>
-          <h3>How it works</h3>
+          <h3>Company</h3>
+          <p>Electric Square Singapore — working on <strong>Parallel</strong>, a sci-fi card game.</p>
+          <h3>Responsibilities</h3>
           <ul>
-            <li><strong>Noise UV distortion</strong> — warps screen UV to simulate brush stroke irregularity</li>
-            <li><strong>Color quantization</strong> — reduces color depth to flat painterly zones</li>
-            <li><strong>Flipbook brush animation</strong> — overlays animated brush textures at 12fps</li>
-            <li><strong>Fresnel-based outlines</strong> — adds ink-like edge definition on geometry</li>
+            <li>Creating special effects for each type of card effect in a sci-fi style, focusing on color and motion of each element</li>
+            <li>Shaders for Paragons (heroes): <strong>SSS shader</strong>, eye shader, hair shader, and <strong>PBR Lit shader</strong> with custom lighting</li>
+            <li>Transition shaders when a user selects a Paragon</li>
+            <li>Card shaders using Unlit shader with custom lighting</li>
+            <li>Special effects for rare card types</li>
+            <li>Prototype effects for clients using <strong>VFX Graph</strong></li>
+            <li>Clean up and optimize effects based on the engine profiler</li>
+            <li>Mentor and guide new FX artist employees on the Unity pipeline</li>
           </ul>
-          <h3>Result</h3>
-          <p>Runs at 60fps on mid-range mobile hardware. Shader LOD system drops to 2-pass mode on low-end devices.</p>
         `,
-        tags: ["URP", "HLSL", "Noise UV", "Color Quantization", "Fresnel", "Post-processing"]
+        tags: ["Unity", "VFX Graph", "SSS Shader", "PBR", "Custom Lighting", "Unlit Shader", "Optimization"]
       },
       {
         name: "AI Animation Pipeline",
@@ -378,17 +223,17 @@ const data = [
         media: [],
         content: `
           <h3>Overview</h3>
-          <p>Unity Editor tool that uses the Anthropic Vision API to analyze 2D sprite sheets and auto-generate bone rigs and animation clips — cutting manual rigging time from hours to minutes.</p>
+          <p>Unity Editor tool using the Anthropic Vision API to analyze 2D sprite sheets and auto-generate bone rigs and animation clips.</p>
           <h3>Pipeline phases</h3>
           <ul>
             <li><strong>Import</strong> — drag in PSD or PNG sprite sheet</li>
             <li><strong>Layout</strong> — auto-slice parts by layer or grid</li>
             <li><strong>AI Rig</strong> — Vision API identifies joints and suggests bone hierarchy</li>
-            <li><strong>Review</strong> — artist tweaks bone positions in the custom Editor window</li>
+            <li><strong>Review</strong> — artist tweaks bone positions in the Editor window</li>
             <li><strong>Generate</strong> — outputs .anim clips and AnimatorController asset</li>
           </ul>
         `,
-        tags: ["Editor Scripting", "Anthropic API", "PSD Importer", "AnimatorController", "AI"]
+        tags: ["Editor Scripting", "Anthropic API", "AnimatorController", "AI", "2D Animation"]
       },
       {
         name: "Texture Creator FX",
@@ -397,116 +242,105 @@ const data = [
         media: [],
         content: `
           <h3>Overview</h3>
-          <p>A fully GPU-driven procedural texture generator running inside the Unity Editor. Artists pick from 115 shader types and preview results in real-time.</p>
-          <h3>Features</h3>
-          <ul>
-            <li>115 HLSL shader types — noise, voronoi, FBM, cell, gradient, pattern...</li>
-            <li>GPU post-effects pass — bloom, vignette, chromatic aberration baked into output</li>
-            <li>Responsive thumbnail grid with live preview on parameter change</li>
-            <li>Export to PNG / EXR with mipmap generation</li>
-          </ul>
+          <p>GPU-driven procedural texture generator running inside the Unity Editor. 115 HLSL shader types with real-time preview, GPU post-effects, and PNG/EXR export.</p>
         `,
-        tags: ["HLSL", "GPU", "Editor GUI", "Procedural", "115 shaders"]
-      },
-      {
-        name: "Web3 JWT Token Bridge",
-        sub: "Chrome Extension + Unity HttpListener",
-        type: "web3", label: "Web3",
-        media: [],
-        content: `
-          <h3>Problem</h3>
-          <p>The Web3 game login flow required developers to manually copy-paste JWT tokens from the browser into Unity Editor every session.</p>
-          <h3>Solution</h3>
-          <p>A Chrome Extension that captures the JWT after wallet login and POSTs it to a local Unity HttpListener server. Unity receives and stores it in EditorPrefs automatically.</p>
-          <ul>
-            <li>Zero manual steps after initial setup</li>
-            <li>Works with any wallet provider that redirects with a JWT param</li>
-            <li>HttpListener runs only during Editor sessions</li>
-          </ul>
-        `,
-        tags: ["Chrome Extension", "HttpListener", "JWT", "HypeBase", "Web3"]
+        tags: ["HLSL", "GPU", "Editor GUI", "Procedural", "Unity"]
       }
     ]
   },
   {
-    year: 2024,
+    year: "2019–2021",
     projects: [
       {
-        name: "Custom Scene View Toolbar",
-        sub: "Quick scene loading for YGG bundle projects",
-        type: "tool", label: "Tool",
+        name: "VNG Corporation — FX Artist",
+        sub: "Dead Target · Zombie Hunter · Sniper Zombie",
+        type: "job", label: "Job",
         media: [],
         content: `
-          <h3>Overview</h3>
-          <p>Unity Editor toolbar for quickly loading scenes and opening decoration prefabs inside YGG bundle projects. Eliminates repetitive manual navigation in the Project window.</p>
+          <h3>Company</h3>
+          <p>VNG Corporation — FX Artist across 3 zombie game titles.</p>
+          <h3>Games</h3>
+          <ul>
+            <li><strong>Dead Target</strong></li>
+            <li><strong>Zombie Hunter</strong></li>
+            <li><strong>Sniper Zombie</strong></li>
+          </ul>
+          <h3>Responsibilities</h3>
+          <ul>
+            <li>In-game effects using Unity: blood, muzzle flash, last shot, UI motion, UI effects</li>
+            <li>Custom shaders and shader optimization for mobile</li>
+          </ul>
+          <h3>Notable project</h3>
+          <p>VFX Artist on the <strong>Justin Bieber VR Music Concept</strong> for Future House Studio — combining music and beats to create effects using VFX Graph and Houdini to create fracture assets, lightning shapes, and ground destruction simulation.</p>
         `,
-        tags: ["Editor Scripting", "YGG Bundles", "SceneView", "Toolbar"]
-      },
-      {
-        name: "SAM2 Segmentation Tool",
-        sub: "Python/FastAPI backend for image segmentation",
-        type: "tool", label: "Tool",
-        media: [],
-        content: `
-          <h3>Overview</h3>
-          <p>Full Python/FastAPI backend for image segmentation using Segment Anything Model 2 (SAM2). Features 6 endpoints, a 12-parameter color correction engine, and Docker configuration.</p>
-        `,
-        tags: ["Python", "FastAPI", "SAM2", "Docker", "Color Correction"]
-      },
-      {
-        name: "lolland-lobby — Web3 Game",
-        sub: "Multiplayer lobby with on-chain auth",
-        type: "web3", label: "Web3",
-        media: [],
-        content: `
-          <h3>Overview</h3>
-          <p>Web3-integrated multiplayer game lobby using the HypeBase.Core networking package and YGG bundle system. Handles on-chain authentication and real-time player state.</p>
-        `,
-        tags: ["Unity", "HypeBase", "YGG", "Networking", "Web3"]
-      },
-      {
-        name: "Pine Script v5 SMC Indicator",
-        sub: "Smart Money Concepts for TradingView",
-        type: "ui", label: "UI",
-        media: [],
-        content: `
-          <h3>Overview</h3>
-          <p>TradingView indicator implementing Smart Money Concepts: Fair Value Gaps, Swing HL, Fibonacci levels, Breaker blocks, Order Blocks, and MTF Fib Confluence zones.</p>
-        `,
-        tags: ["Pine Script", "TradingView", "SMC", "FVG", "Fibonacci"]
+        tags: ["Unity", "VFX Graph", "Houdini", "Mobile Optimization", "Custom Shader", "VR"]
       }
     ]
   },
   {
-    year: 2023,
+    year: "2018–2019",
     projects: [
       {
-        name: "TransformResetButton Inspector",
-        sub: "Custom Unity inspector with per-axis reset",
-        type: "tool", label: "Tool",
+        name: "Virtuous Viet Nam (Sparx*) — FX Artist",
+        sub: "Age of Empires · Lego Star Wars",
+        type: "job", label: "Job",
         media: [],
         content: `
-          <h3>Overview</h3>
-          <p>Custom Unity inspector adding per-axis reset buttons for Transform and RectTransform components. Supports multi-object editing.</p>
+          <h3>Company</h3>
+          <p>Virtuous Viet Nam (Sparx*)</p>
+          <h3>Responsibilities</h3>
+          <ul>
+            <li>Building destruction effects for <strong>Age of Empires</strong> (castle, market, house...) using Houdini</li>
+            <li>Cloth simulation for <strong>Lego Star Wars</strong></li>
+          </ul>
         `,
-        tags: ["Editor Scripting", "Inspector", "RectTransform", "Multi-edit"]
-      },
+        tags: ["Houdini", "Destruction FX", "Cloth Simulation", "Age of Empires", "Lego Star Wars"]
+      }
+    ]
+  },
+  {
+    year: "2010–2018",
+    projects: [
       {
-        name: "Krita Python Layer Tools",
-        sub: "Multi-function popup via Krita Scripter",
-        type: "tool", label: "Tool",
+        name: "568e — Video Editor",
+        sub: "Game trailers, video ads, 2D animation",
+        type: "job", label: "Job",
         media: [],
         content: `
-          <h3>Overview</h3>
-          <p>Multi-function layer management popup in Krita via the Scripter tool. Features center canvas, trim canvas, and export commands — working around bounds() API instability with soft glow effects.</p>
+          <h3>Company</h3>
+          <p>568e</p>
+          <h3>Responsibilities</h3>
+          <ul>
+            <li>Creating videos for game trailers and video ads</li>
+            <li>2D animation for in-game loading screens and websites</li>
+          </ul>
         `,
-        tags: ["Python", "Krita", "Scripting", "Layer Management"]
+        tags: ["Video Editing", "2D Animation", "Game Trailer", "Motion Graphics"]
+      }
+    ]
+  },
+  {
+    year: "2009",
+    projects: [
+      {
+        name: "VNG Corporation — Game Tester",
+        sub: "QA for new patches and events",
+        type: "job", label: "Job",
+        media: [],
+        content: `
+          <h3>Company</h3>
+          <p>VNG Corporation</p>
+          <h3>Responsibilities</h3>
+          <ul>
+            <li>Test new patches and new events before publishing</li>
+          </ul>
+        `,
+        tags: ["QA", "Game Testing", "VNG"]
       }
     ]
   }
 ];
 
-// ─── BUILD NAV ──────────────────────────────────────────────────
 function buildNav() {
   const nav = document.getElementById('yearNav');
   data.forEach((y, i) => {
@@ -516,44 +350,33 @@ function buildNav() {
     btn.onclick = () => {
       document.querySelectorAll('.year-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      document.getElementById('year-' + y.year).scrollIntoView({ behavior: 'smooth' });
+      document.getElementById('year-' + y.year.replace(/[^a-z0-9]/gi,'_')).scrollIntoView({ behavior: 'smooth' });
     };
     nav.appendChild(btn);
   });
 }
 
-// ─── BUILD TIMELINE ─────────────────────────────────────────────
 function buildTimeline() {
   const container = document.getElementById('timelineContainer');
   data.forEach(y => {
+    const safeId = y.year.replace(/[^a-z0-9]/gi,'_');
     const section = document.createElement('div');
     section.className = 'year-section';
-    section.id = 'year-' + y.year;
+    section.id = 'year-' + safeId;
 
     const projectsHTML = y.projects.map((p, pi) => {
-      const id = `p${y.year}-${pi}`;
+      const id = `p${safeId}-${pi}`;
       const hasMedia = p.media && p.media.length > 0;
-
-      const thumbsHTML = hasMedia && p.media.length > 1 ? `
-        <div class="media-thumbs">
-          ${p.media.map((m, mi) => `
-            <div class="media-thumb${mi===0?' active':''}" onclick="selectMedia('${id}',${mi})"
-              data-src="${m.src}" data-kind="${m.kind}" data-caption="${m.caption||''}">
-              ${m.kind==='img' ? `<img src="${m.src}" loading="lazy" />` : `<video src="${m.src}" muted preload="metadata"></video><span class="vid-badge">▶</span>`}
-            </div>
-          `).join('')}
-        </div>
-      ` : '';
-
       const first = hasMedia ? p.media[0] : null;
       const viewerHTML = first ? `
         <div class="media-viewer">
-          ${first.kind==='img'
-            ? `<img id="${id}-viewer" src="${first.src}" />`
-            : `<video id="${id}-viewer" src="${first.src}" controls></video>`}
+          ${first.kind==='img' ? `<img id="${id}-viewer" src="${first.src}" />` : `<video id="${id}-viewer" src="${first.src}" controls></video>`}
         </div>
         <div class="media-caption" id="${id}-caption">${first.caption||''}</div>
-        ${thumbsHTML}
+        ${p.media.length > 1 ? `<div class="media-thumbs">${p.media.map((m,mi) => `
+          <div class="media-thumb${mi===0?' active':''}" onclick="selectMedia('${id}',${mi})" data-src="${m.src}" data-kind="${m.kind}" data-caption="${m.caption||''}">
+            ${m.kind==='img'?`<img src="${m.src}" loading="lazy" />`:`<video src="${m.src}" muted preload="metadata"></video>`}
+          </div>`).join('')}</div>` : ''}
       ` : '';
 
       return `
@@ -573,8 +396,7 @@ function buildTimeline() {
             <div class="project-text">${p.content||''}</div>
             <div class="project-tags">${(p.tags||[]).map(t=>`<span class="project-tag">${t}</span>`).join('')}</div>
           </div>
-        </div>
-      `;
+        </div>`;
     }).join('');
 
     section.innerHTML = `
@@ -583,24 +405,19 @@ function buildTimeline() {
         <div class="year-line"></div>
         <span class="year-count">${y.projects.length} project${y.projects.length!==1?'s':''}</span>
       </div>
-      <div class="project-list">${projectsHTML}</div>
-    `;
+      <div class="project-list">${projectsHTML}</div>`;
     container.appendChild(section);
   });
 }
 
-function toggle(id) {
-  document.getElementById(id).classList.toggle('open');
-}
+function toggle(id) { document.getElementById(id).classList.toggle('open'); }
 
 function selectMedia(cardId, idx) {
   const card = document.getElementById(cardId);
   const thumbs = card.querySelectorAll('.media-thumb');
   thumbs.forEach((t,i) => t.classList.toggle('active', i===idx));
   const thumb = thumbs[idx];
-  const kind = thumb.dataset.kind;
-  const src = thumb.dataset.src;
-  const caption = thumb.dataset.caption || '';
+  const kind = thumb.dataset.kind, src = thumb.dataset.src, caption = thumb.dataset.caption||'';
   let viewer = document.getElementById(cardId+'-viewer');
   if (kind==='img') {
     if (viewer.tagName==='VIDEO') { const img=document.createElement('img'); img.id=cardId+'-viewer'; viewer.replaceWith(img); viewer=img; }
@@ -613,8 +430,7 @@ function selectMedia(cardId, idx) {
   if (cap) cap.textContent = caption;
 }
 
-buildNav();
-buildTimeline();
+buildNav(); buildTimeline();
 </script>
 </body>
 </html>
