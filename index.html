@@ -34,17 +34,19 @@ h1 span { color: var(--m); font-weight: 400; }
 .ybtn { font-size: 13px; font-weight: 500; padding: 6px 16px; border-radius: 99px; border: 0.5px solid var(--bh); background: transparent; color: var(--m); cursor: pointer; transition: all .15s; }
 .ybtn:hover { background: var(--sf); color: var(--t); }
 .ybtn.on { background: var(--t); color: var(--bg); border-color: var(--t); }
+.ybtn.ybtn-personal { border-color: var(--ac); color: var(--at); }
+.ybtn.ybtn-personal.on { background: var(--abg); color: var(--at); border-color: var(--ac); }
 .ysec { margin-bottom: 56px; scroll-margin-top: 64px; }
 .yhead { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
 .ynum { font-size: 20px; font-weight: 600; color: var(--t); }
 .yline { flex: 1; height: 0.5px; background: var(--b); }
-.ycnt { font-size: 12px; color: var(--h); }
+.ycnt { font-size: 12px; color: var(--m); }
 .plist { display: flex; flex-direction: column; gap: 10px; }
 .card { background: var(--sf); border: 0.5px solid var(--b); border-radius: var(--r); overflow: hidden; transition: border-color .15s; }
 .card:hover { border-color: var(--bh); }
 .phead { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 20px; cursor: pointer; user-select: none; }
 .pname { font-size: 15px; font-weight: 500; color: var(--t); margin-bottom: 3px; }
-.psub { font-size: 12px; color: var(--h); }
+.psub { font-size: 12px; color: var(--m); }
 .badge { font-size: 11px; padding: 3px 9px; border-radius: 99px; white-space: nowrap; flex-shrink: 0; }
 .job  { background: var(--gbg); color: var(--gt); }
 .tool { background: var(--obg); color: var(--ot); }
@@ -298,7 +300,7 @@ function buildNav() {
   var nav = document.getElementById('ynav');
   D.forEach(function(y, i) {
     var b = document.createElement('button');
-    b.className = 'ybtn' + (i === 0 ? ' on' : '');
+    b.className = 'ybtn' + (i === 0 ? ' on' : '') + (y.y === 'Personal' ? ' ybtn-personal' : '');
     b.textContent = y.y;
     b.onclick = function() {
       document.querySelectorAll('.ybtn').forEach(function(x) { x.classList.remove('on'); });
