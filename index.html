@@ -50,7 +50,7 @@ h1 span { color: var(--m); font-weight: 400; }
 .tool { background: var(--obg); color: var(--ot); }
 .vfx  { background: var(--abg); color: var(--at); }
 .web3 { background: var(--rbg); color: var(--rt); }
-.personal { background: rgba(127,119,221,0.2); color: #afa9ec; border: 0.5px solid rgba(127,119,221,0.4); }
+.personal { background: var(--abg); color: var(--at); }
 .arr { font-size: 12px; color: var(--h); flex-shrink: 0; transition: transform .25s; margin-left: 4px; }
 .card.open .arr { transform: rotate(180deg); }
 .pbody { display: none; border-top: 0.5px solid var(--b); }
@@ -103,7 +103,6 @@ footer a:hover { text-decoration: underline; }
       <span class="skill">PBR Lit Shader</span>
       <span class="skill">Substance Designer</span>
       <span class="skill">Photoshop</span>
-      <span class="skill">Editor Scripting C#</span>
       <span class="skill">2D Animation</span>
     </div>
   </section>
@@ -476,6 +475,15 @@ function sm(cid, idx) {
   var c = document.getElementById(cid + '-c');
   if (c) c.textContent = cap;
 }
+
+// Set email via JS to prevent scraping
+(function(){
+  var u='minte131';var d='gmail.com';var e=u+'@'+d;
+  var el=document.getElementById('email-link');
+  if(el){el.href='mailto:'+e;document.getElementById('email-text').textContent=e;}
+  var fl=document.getElementById('footer-email-link');
+  if(fl){fl.href='mailto:'+e;document.getElementById('footer-email-text').textContent=e;}
+})();
 
 buildNav();
 buildTimeline();
