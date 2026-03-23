@@ -128,6 +128,8 @@ var D = [
         "c": "job",
         "l": "Job",
         "m": [
+          { "kind": "youtube", "src": "https://www.youtube.com/embed/BHHRLgfHTAA", "caption": "Parallel - Character Shader" },
+          { "kind": "youtube", "src": "https://www.youtube.com/embed/D8KAwYg74LM", "caption": "Parallel GamePlay" },
           { "kind": "video", "src": "assets/ActionFailed.mp4", "caption": "Action Failed" },
           { "kind": "video", "src": "assets/Armed.mp4", "caption": "Armed" },
           { "kind": "video", "src": "assets/AttackReDirect.mp4", "caption": "Attack Re Direct" },
@@ -341,40 +343,45 @@ function buildTimeline() {
       var first = p.m && p.m.length ? p.m[0] : null;
       var vh = '';
       if (first) {
-        var allEmbed = p.m.every(function(m) { return m.kind === 'vimeo' || m.kind === 'youtube'; });
-        var allVideo = p.m.every(function(m) { return m.kind === 'video'; });
+        var embedItems = p.m.filter(function(m) { return m.kind === 'vimeo' || m.kind === 'youtube'; });
+        var videoItems = p.m.filter(function(m) { return m.kind === 'video'; });
+        var imgItems   = p.m.filter(function(m) { return m.kind === 'img'; });
 
-        if (allEmbed && p.m.length > 1) {
-          // Vimeo/YouTube: stack vertically
-          vh = p.m.map(function(m) {
+        // Section 1: YouTube/Vimeo stacked vertically
+        if (embedItems.length > 0) {
+          vh += embedItems.map(function(m) {
             return '<div class="mview"><iframe src="' + m.src + '" style="width:100%;height:360px;border:none;display:block;" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>'
               + '<div class="mcap">' + (m.caption || '') + '</div>';
           }).join('');
-        } else if (allVideo && p.m.length > 1) {
-          // Multiple MP4: collapsible gallery with auto-play next
-          var thumbsHTML = p.m.map(function(m, mi) {
-            return '<div class="mthumb' + (mi === 0 ? ' on' : '') + '" onclick="sm(\'' + id + '\',' + mi + ')" data-src="' + m.src + '" data-kind="' + m.kind + '" data-cap="' + (m.caption || '') + '">'
-              + rmedia(m, id, false) + '</div>';
+        }
+
+        // Section 2: MP4 collapsible gallery with auto-play
+        if (videoItems.length === 1) {
+          vh += '<div class="mview"><video id="' + id + '-v" controls style="width:100%;max-height:360px;display:block;" src="' + videoItems[0].src + '"></video></div>'
+             + '<div class="mcap" id="' + id + '-c">' + (videoItems[0].caption || '') + '</div>';
+        } else if (videoItems.length > 1) {
+          var firstVid = videoItems[0];
+          var thumbsHTML = videoItems.map(function(m, mi) {
+            return '<div class="mthumb' + (mi === 0 ? ' on' : '') + '" onclick="smv(\'' + id + '\',' + mi + ')" data-src="' + m.src + '" data-cap="' + (m.caption || '') + '">'
+              + '<video muted preload="metadata" src="' + m.src + '"></video></div>';
           }).join('');
-          vh = '<div class="gallery-toggle" onclick="toggleGallery(\'' + id + '\')" style="display:flex;align-items:center;gap:8px;padding:14px 20px;cursor:pointer;border-bottom:0.5px solid var(--b);user-select:none;">'
+          vh += '<div class="gallery-toggle" onclick="toggleGallery(\'' + id + '\')" style="display:flex;align-items:center;gap:8px;padding:14px 20px;cursor:pointer;border-bottom:0.5px solid var(--b);user-select:none;">'
             + '<span style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--h);">Card Effects</span>'
-            + '<span style="font-size:11px;color:var(--m);flex:1;">Click to view all ' + p.m.length + ' effects</span>'
+            + '<span style="font-size:11px;color:var(--m);flex:1;">Click to view all ' + videoItems.length + ' effects</span>'
             + '<span id="' + id + '-garr" style="font-size:12px;color:var(--h);transition:transform .25s;">&#9662;</span>'
             + '</div>'
             + '<div id="' + id + '-gallery" style="display:none;">'
-            + '<div class="mview"><video id="' + id + '-v" controls style="width:100%;max-height:360px;display:block;" src="' + first.src + '"></video></div>'
-            + '<div class="mcap" id="' + id + '-c">' + (first.caption || '') + '</div>'
+            + '<div class="mview"><video id="' + id + '-v" controls style="width:100%;max-height:360px;display:block;" src="' + firstVid.src + '"></video></div>'
+            + '<div class="mcap" id="' + id + '-c">' + (firstVid.caption || '') + '</div>'
             + '<div class="mthumbs">' + thumbsHTML + '</div>'
             + '</div>';
-        } else {
-          // Single or mixed: default viewer
-          vh = '<div class="mview">' + rmedia(first, id, true) + '</div>'
-             + '<div class="mcap" id="' + id + '-c">' + (first.caption || '') + '</div>';
-          if (p.m.length > 1) {
-            vh += '<div class="mthumbs">' + p.m.map(function(m, mi) {
-              return '<div class="mthumb' + (mi === 0 ? ' on' : '') + '" onclick="sm(\'' + id + '\',' + mi + ')" data-src="' + m.src + '" data-kind="' + m.kind + '" data-cap="' + (m.caption || '') + '">' + rmedia(m, id, false) + '</div>';
-            }).join('') + '</div>';
-          }
+        }
+
+        // Section 3: Images
+        if (imgItems.length > 0) {
+          var firstImg = imgItems[0];
+          vh += '<div class="mview"><img id="' + id + '-iv" style="width:100%;max-height:360px;object-fit:contain;display:block;" src="' + firstImg.src + '" /></div>'
+             + '<div class="mcap">' + (firstImg.caption || '') + '</div>';
         }
       }
       return '<div class="card" id="' + id + '">'
@@ -420,6 +427,25 @@ function setupAutoPlay(id) {
     sm(id, nextIdx);
     var nextV = document.getElementById(id + '-v');
     if (nextV && nextV.tagName === 'VIDEO') nextV.play();
+  };
+}
+
+function smv(id, idx) {
+  var gallery = document.getElementById(id + '-gallery');
+  if (!gallery) return;
+  var thumbs = gallery.querySelectorAll('.mthumb');
+  thumbs.forEach(function(t, i) { t.classList.toggle('on', i === idx); });
+  var v = document.getElementById(id + '-v');
+  if (!v) return;
+  v.src = thumbs[idx].dataset.src;
+  v.load();
+  v.play();
+  var c = document.getElementById(id + '-c');
+  if (c) c.textContent = thumbs[idx].dataset.cap || '';
+  // auto-play next
+  v.onended = function() {
+    var nextIdx = (idx + 1) % thumbs.length;
+    smv(id, nextIdx);
   };
 }
 
