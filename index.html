@@ -87,7 +87,7 @@ footer a:hover { text-decoration: underline; }
     <p style="font-size:18px;color:var(--m);margin-bottom:16px;font-weight:400;letter-spacing:-.01em;">Realtime FX Artist &nbsp;·&nbsp; 15 years in game industry</p>
     <p class="bio" style="margin-bottom:20px;">FX Artist with 15 years of experience in the gaming industry and 6+ years creating special effects — explosions, destruction, and game effects using particle systems, custom shaders, Houdini, and Unity. Actively leveraging AI tools to build custom Unity Editor tooling that accelerates VFX workflows — automating repetitive pipeline tasks and reducing manual overhead so more time goes into the actual craft.</p>
     <div class="contacts">
-      <a class="contact" href="/cdn-cgi/l/email-protection#a8c5c1c6dccd999b99e8cfc5c9c1c486cbc7c5">&#9993; <span class="__cf_email__" data-cfemail="573a3e39233266646617303a363e3b7934383a">[email&#160;protected]</span></a>
+      <span class="contact" id="email-link" style="cursor:pointer;">&#9993; <span id="email-text"></span></span>
       <a class="contact" href="https://linkedin.com/in/do-minh-triet-688b4994/" target="_blank">in LinkedIn</a>
       <a class="contact" href="https://www.artstation.com/minte131" target="_blank">&#9671; ArtStation</a>
       <a class="contact" href="https://trietvfx.dev">&#11042; trietvfx.dev</a>
@@ -112,11 +112,11 @@ footer a:hover { text-decoration: underline; }
   <div id="tc"></div>
 
   <footer>
-    <p>trietvfx.dev &nbsp;&middot;&nbsp; <a href="/cdn-cgi/l/email-protection#acc1c5c2d8c99d9f9deccbc1cdc5c082cfc3c1"><span class="__cf_email__" data-cfemail="afc2c6c1dbca9e9c9eefc8c2cec6c381ccc0c2">[email&#160;protected]</span></a></p>
+    <p>trietvfx.dev &nbsp;&middot;&nbsp; <span id="footer-email-link" style="cursor:pointer;color:var(--at);"><span id="footer-email-text"></span></span></p>
   </footer>
 
 </div>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 
 var D = [
   {
@@ -478,11 +478,19 @@ function sm(cid, idx) {
 
 // Set email via JS to prevent scraping
 (function(){
-  var u='minte131';var d='gmail.com';var e=u+'@'+d;
+  var p1='minte131';var p2='gmai'+'l.com';var em=p1+'\x40'+p2;
   var el=document.getElementById('email-link');
-  if(el){el.href='mailto:'+e;document.getElementById('email-text').textContent=e;}
+  if(el){
+    el.onclick=function(){window.location='mai'+'lto:'+em;};
+    var et=document.getElementById('email-text');
+    if(et) et.textContent=em;
+  }
   var fl=document.getElementById('footer-email-link');
-  if(fl){fl.href='mailto:'+e;document.getElementById('footer-email-text').textContent=e;}
+  if(fl){
+    fl.onclick=function(){window.location='mai'+'lto:'+em;};
+    var ft=document.getElementById('footer-email-text');
+    if(ft) ft.textContent=em;
+  }
 })();
 
 buildNav();
