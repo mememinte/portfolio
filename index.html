@@ -86,7 +86,7 @@ footer a:hover { text-decoration: underline; }
     <h1>Triet Do Minh <span>/ 15 years in game industry</span></h1>
     <p class="bio">FX Artist with 15 years of experience in the gaming industry and 6+ years creating special effects — explosions, destruction, and game effects using particle systems, custom shaders, Houdini, and Unity. Currently deepening skills in custom lighting, shader writing, and C# integration. Actively leveraging AI tools to build custom Unity Editor tooling that accelerates VFX workflows — automating repetitive pipeline tasks and reducing manual overhead so more time goes into the actual craft.</p>
     <div class="contacts">
-      <a class="contact" href="mailto:minte131@gmail.com">&#9993; minte131@gmail.com</a>
+      <a class="contact" href="/cdn-cgi/l/email-protection#a8c5c1c6dccd999b99e8cfc5c9c1c486cbc7c5">&#9993; <span class="__cf_email__" data-cfemail="573a3e39233266646617303a363e3b7934383a">[email&#160;protected]</span></a>
       <a class="contact" href="https://linkedin.com/in/do-minh-triet-688b4994/" target="_blank">in LinkedIn</a>
       <a class="contact" href="https://www.artstation.com/minte131" target="_blank">&#9671; ArtStation</a>
       <a class="contact" href="https://trietvfx.dev">&#11042; trietvfx.dev</a>
@@ -112,11 +112,11 @@ footer a:hover { text-decoration: underline; }
   <div id="tc"></div>
 
   <footer>
-    <p>trietvfx.dev &nbsp;&middot;&nbsp; <a href="mailto:minte131@gmail.com">minte131@gmail.com</a></p>
+    <p>trietvfx.dev &nbsp;&middot;&nbsp; <a href="/cdn-cgi/l/email-protection#acc1c5c2d8c99d9f9deccbc1cdc5c082cfc3c1"><span class="__cf_email__" data-cfemail="afc2c6c1dbca9e9c9eefc8c2cec6c381ccc0c2">[email&#160;protected]</span></a></p>
   </footer>
 
 </div>
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 
 var D = [
   {
@@ -166,7 +166,7 @@ var D = [
           { "kind": "video", "src": "assets/Salvage.mp4", "caption": "Salvage" },
           { "kind": "video", "src": "assets/Shield.mp4", "caption": "Shield" }
         ],
-        "x": "<h3>Card Effects</h3><p>Click on a clip below to preview each Parallel card effect.</p><h3>Company</h3><p>Electric Square Singapore - working on <strong>Parallel</strong>, a sci-fi card game.</p><h3>Responsibilities</h3><ul><li>Special effects for each card type in sci-fi style</li><li>Shaders for Paragons: <strong>SSS shader</strong>, eye shader, hair shader, <strong>PBR Lit shader</strong> with custom lighting</li><li>Transition shaders when user selects a Paragon</li><li>Card shaders using Unlit shader with custom lighting</li><li>Special effects for rare card types</li><li>Prototype effects using <strong>VFX Graph</strong></li><li>Optimize effects based on engine profiler</li><li>Mentor new FX artists on Unity pipeline</li></ul>",
+        "x": "<h3>Company</h3><p>Electric Square Singapore - working on <strong>Parallel</strong>, a sci-fi card game.</p><h3>Responsibilities</h3><ul><li>Special effects for each card type in sci-fi style</li><li>Shaders for Paragons: <strong>SSS shader</strong>, eye shader, hair shader, <strong>PBR Lit shader</strong> with custom lighting</li><li>Transition shaders when user selects a Paragon</li><li>Card shaders using Unlit shader with custom lighting</li><li>Special effects for rare card types</li><li>Prototype effects using <strong>VFX Graph</strong></li><li>Optimize effects based on engine profiler</li><li>Mentor new FX artists on Unity pipeline</li></ul>",
         "t": [
           "Unity",
           "VFX Graph",
@@ -342,12 +342,32 @@ function buildTimeline() {
       var vh = '';
       if (first) {
         var allEmbed = p.m.every(function(m) { return m.kind === 'vimeo' || m.kind === 'youtube'; });
+        var allVideo = p.m.every(function(m) { return m.kind === 'video'; });
+
         if (allEmbed && p.m.length > 1) {
+          // Vimeo/YouTube: stack vertically
           vh = p.m.map(function(m) {
             return '<div class="mview"><iframe src="' + m.src + '" style="width:100%;height:360px;border:none;display:block;" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>'
               + '<div class="mcap">' + (m.caption || '') + '</div>';
           }).join('');
+        } else if (allVideo && p.m.length > 1) {
+          // Multiple MP4: collapsible gallery with auto-play next
+          var thumbsHTML = p.m.map(function(m, mi) {
+            return '<div class="mthumb' + (mi === 0 ? ' on' : '') + '" onclick="sm(\'' + id + '\',' + mi + ')" data-src="' + m.src + '" data-kind="' + m.kind + '" data-cap="' + (m.caption || '') + '">'
+              + rmedia(m, id, false) + '</div>';
+          }).join('');
+          vh = '<div class="gallery-toggle" onclick="toggleGallery(\'' + id + '\')" style="display:flex;align-items:center;gap:8px;padding:14px 20px;cursor:pointer;border-bottom:0.5px solid var(--b);user-select:none;">'
+            + '<span style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--h);">Card Effects</span>'
+            + '<span style="font-size:11px;color:var(--m);flex:1;">Click to view all ' + p.m.length + ' effects</span>'
+            + '<span id="' + id + '-garr" style="font-size:12px;color:var(--h);transition:transform .25s;">&#9662;</span>'
+            + '</div>'
+            + '<div id="' + id + '-gallery" style="display:none;">'
+            + '<div class="mview"><video id="' + id + '-v" controls style="width:100%;max-height:360px;display:block;" src="' + first.src + '"></video></div>'
+            + '<div class="mcap" id="' + id + '-c">' + (first.caption || '') + '</div>'
+            + '<div class="mthumbs">' + thumbsHTML + '</div>'
+            + '</div>';
         } else {
+          // Single or mixed: default viewer
           vh = '<div class="mview">' + rmedia(first, id, true) + '</div>'
              + '<div class="mcap" id="' + id + '-c">' + (first.caption || '') + '</div>';
           if (p.m.length > 1) {
@@ -373,6 +393,36 @@ function buildTimeline() {
   });
 }
 
+function toggleGallery(id) {
+  var gallery = document.getElementById(id + '-gallery');
+  var arrow = document.getElementById(id + '-garr');
+  var isOpen = gallery.style.display !== 'none';
+  gallery.style.display = isOpen ? 'none' : 'block';
+  if (arrow) arrow.style.transform = isOpen ? '' : 'rotate(180deg)';
+  if (!isOpen) {
+    // Set up auto-play next on open
+    setupAutoPlay(id);
+  }
+}
+
+function setupAutoPlay(id) {
+  var v = document.getElementById(id + '-v');
+  if (!v) return;
+  v.onended = function() {
+    var thumbs = document.querySelectorAll('#p' + id.slice(1) + ' .mthumb, .card .mthumb');
+    // find current active index
+    var card = v.closest ? v.closest('.card') : null;
+    if (!card) return;
+    var allThumbs = card.querySelectorAll('.mthumb');
+    var curIdx = -1;
+    allThumbs.forEach(function(t, i) { if (t.classList.contains('on')) curIdx = i; });
+    var nextIdx = (curIdx + 1) % allThumbs.length;
+    sm(id, nextIdx);
+    var nextV = document.getElementById(id + '-v');
+    if (nextV && nextV.tagName === 'VIDEO') nextV.play();
+  };
+}
+
 function tog(id) { document.getElementById(id).classList.toggle('open'); }
 
 function sm(cid, idx) {
@@ -387,7 +437,6 @@ function sm(cid, idx) {
   } else if (kind === 'img') {
     if (v.tagName !== 'IMG') { var im = document.createElement('img'); im.id = cid + '-v'; im.style = 'width:100%;max-height:360px;object-fit:contain;display:block;'; v.replaceWith(im); v = im; }
     v.src = src;
-  
   } else {
     if (v.tagName !== 'VIDEO') { var vd = document.createElement('video'); vd.id = cid + '-v'; vd.controls = true; vd.style = 'width:100%;max-height:360px;display:block;'; v.replaceWith(vd); v = vd; }
     v.src = src; v.load();
