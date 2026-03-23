@@ -54,8 +54,8 @@ h1 span { color: var(--m); font-weight: 400; }
 .card.open .arr { transform: rotate(180deg); }
 .pbody { display: none; border-top: 0.5px solid var(--b); }
 .card.open .pbody { display: block; }
-.mview { background: #111; }
-.mview img, .mview video { width: 100%; max-height: 360px; object-fit: contain; display: block; }
+.mview { background: #111; min-height: 200px; }
+.mview img, .mview video { width: 100%; height: 360px; max-height: 360px; object-fit: contain; display: block; }
 .mview iframe { width: 100%; height: 360px; border: none; display: block; }
 .mcap { font-size: 11px; color: var(--h); padding: 8px 20px; text-align: center; border-bottom: 0.5px solid var(--b); }
 .mthumbs { display: flex; gap: 8px; padding: 12px 20px; overflow-x: auto; scrollbar-width: none; border-bottom: 0.5px solid var(--b); }
@@ -222,7 +222,9 @@ var D = [
         "s": "Age of Empires / Lego Star Wars",
         "c": "job",
         "l": "Job",
-        "m": [],
+        "m": [
+          { "kind": "vimeo", "src": "https://player.vimeo.com/video/330419091?h=c9e3055284", "caption": "Virtuous Viet Nam - FX Reel" }
+        ],
         "x": "<h3>Responsibilities</h3><ul><li>Destruction effects for <strong>Age of Empires</strong> (castle, market, house) using Houdini</li><li>Cloth simulation for <strong>Lego Star Wars</strong></li></ul>",
         "t": [
           "Houdini",
@@ -250,6 +252,20 @@ var D = [
           "Game Trailer",
           "Motion Graphics"
         ]
+      }
+    ]
+  },
+  {
+    "y": "Personal",
+    "p": [
+      {
+        "n": "Personal Project",
+        "s": "Add your personal projects here",
+        "c": "vfx",
+        "l": "VFX",
+        "m": [],
+        "x": "<h3>Overview</h3><p>Add your personal project description here.</p>",
+        "t": ["Personal"]
       }
     ]
   },
