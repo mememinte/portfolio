@@ -388,3 +388,16 @@ function sm(cid, idx) {
     if (v.tagName !== 'IMG') { var im = document.createElement('img'); im.id = cid + '-v'; im.style = 'width:100%;max-height:360px;object-fit:contain;display:block;'; v.replaceWith(im); v = im; }
     v.src = src;
   }
+  } else {
+    if (v.tagName !== 'VIDEO') { var vd = document.createElement('video'); vd.id = cid + '-v'; vd.controls = true; vd.style = 'width:100%;max-height:360px;display:block;'; v.replaceWith(vd); v = vd; }
+    v.src = src; v.load();
+  }
+  var c = document.getElementById(cid + '-c');
+  if (c) c.textContent = cap;
+}
+
+buildNav();
+buildTimeline();
+</script>
+</body>
+</html>
