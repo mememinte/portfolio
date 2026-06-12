@@ -34,8 +34,6 @@ h1 span { color: var(--m); font-weight: 400; }
 .ybtn { font-size: 13px; font-weight: 500; padding: 6px 16px; border-radius: 99px; border: 0.5px solid var(--bh); background: transparent; color: var(--m); cursor: pointer; transition: all .15s; }
 .ybtn:hover { background: var(--sf); color: var(--t); }
 .ybtn.on { background: var(--t); color: var(--bg); border-color: var(--t); }
-.ybtn.ybtn-personal { border-color: var(--ac); color: var(--at); }
-.ybtn.ybtn-personal.on { background: var(--abg); color: var(--at); border-color: var(--ac); }
 .ysec { margin-bottom: 56px; scroll-margin-top: 64px; }
 .yhead { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
 .ynum { font-size: 20px; font-weight: 600; color: var(--t); }
@@ -52,7 +50,6 @@ h1 span { color: var(--m); font-weight: 400; }
 .tool { background: var(--obg); color: var(--ot); }
 .vfx  { background: var(--abg); color: var(--at); }
 .web3 { background: var(--rbg); color: var(--rt); }
-.personal { background: var(--abg); color: var(--at); }
 .arr { font-size: 12px; color: var(--h); flex-shrink: 0; transition: transform .25s; margin-left: 4px; }
 .card.open .arr { transform: rotate(180deg); }
 .pbody { display: none; border-top: 0.5px solid var(--b); }
@@ -121,6 +118,31 @@ footer a:hover { text-decoration: underline; }
 <script>
 
 var D = [
+  {
+    "y": "2025",
+    "p": [
+      {
+        "n": "Hype Reel - Lead Visual Effect",
+        "s": "WebGL Mobile Games · Oct 2025 - Jun 2026",
+        "c": "job",
+        "l": "Job",
+        "m": [],
+        "x": "<h3>Company</h3><p><strong>Hype Reel</strong> — Full-time, On-site, Ho Chi Minh City.</p><h3>Responsibilities</h3><ul><li>Collaborate with Game Designers to finalize visual direction for new games and features</li><li>Define and manage production timelines across 2D Animation, 3D Modeling, and Technical Art disciplines — targeting 2+ game launches or major feature releases every 3 weeks</li><li>Assemble assets into gameplay sequences, developing gameplay and environment VFX</li><li>Integrate AI tools to streamline workflows and reduce production time</li><li>Lead R&amp;D efforts for WebGL mobile performance optimization — pushing complex visual features while maintaining stable, cross-device performance</li></ul>",
+        "t": ["Unity", "WebGL", "VFX", "Technical Art", "AI Tools", "Performance Optimization", "2D Animation", "3D Modeling"]
+      },
+      {
+        "n": "Procedural Environment - Personal Project",
+        "s": "Houdini HDA + Unreal Engine",
+        "c": "vfx",
+        "l": "VFX",
+        "m": [
+          { "kind": "vimeo", "src": "https://player.vimeo.com/video/1005657884?h=e999d740d9", "caption": "Procedural Environment — Houdini + Unreal" }
+        ],
+        "x": "<h3>Overview</h3><p>Personal project created by making HDA assets in Houdini and finalizing them in Unreal Engine. Includes a procedural house, boat, branches, and a water shader. Flowers, trees, and materials sourced from Megascans.</p><h3>Technical Highlights</h3><ul><li>Used Houdini to store <strong>vertex data</strong> to drive a growing branch effect</li><li>The same technique can be applied to simulate disease spreading through blood vessels or vines</li><li>Water shader built in Unreal with procedural flow and foam</li></ul><h3>Full Breakdown</h3><p><a href=\"https://www.artstation.com/artwork/Zle58x\" target=\"_blank\" style=\"color:var(--at)\">View full breakdown on ArtStation &#8594;</a></p>",
+        "t": ["Houdini", "HDA", "Unreal Engine", "Megascans", "Vertex Data", "Procedural", "Water Shader"]
+      }
+    ]
+  },
   {
     "y": "2022-2024",
     "p": [
@@ -275,20 +297,6 @@ var D = [
           "MMORPG",
           "Vo Lam Truyen Ky"
         ]
-      }
-    ]
-  },
-  {
-    "y": "Personal",
-    "p": [
-      {
-        "n": "Personal Project",
-        "s": "Add your personal projects here",
-        "c": "personal",
-        "l": "Personal",
-        "m": [],
-        "x": "<h3>Overview</h3><p>Add your personal project description here.</p>",
-        "t": ["Personal"]
       }
     ]
   }
