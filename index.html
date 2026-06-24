@@ -233,8 +233,6 @@ var D = [
           { "kind": "img", "src": "assets/02_Parallel.jpg", "caption": "Parallel — Sci-Fi Card Game" },
           { "kind": "youtube", "src": "https://www.youtube.com/embed/D8KAwYg74LM", "caption": "Parallel GamePlay" },
           { "kind": "youtube", "src": "https://www.youtube.com/embed/BHHRLgfHTAA", "caption": "Parallel - Character Shader" },
-          { "kind": "youtube", "src": "https://www.youtube.com/embed/BHHRLgfHTAA", "caption": "Parallel - Character Shader" },
-          { "kind": "youtube", "src": "https://www.youtube.com/embed/D8KAwYg74LM", "caption": "Parallel GamePlay" },
           { "kind": "video", "src": "assets/ActionFailed.mp4", "caption": "Action Failed" },
           { "kind": "video", "src": "assets/Armed.mp4", "caption": "Armed" },
           { "kind": "video", "src": "assets/AttackReDirect.mp4", "caption": "Attack Re Direct" },
@@ -639,13 +637,13 @@ function flattenProjects() {
   var all = [];
   D.forEach(function(y) {
     y.p.forEach(function(p) {
-      all.push({ year: y.y, project: p });
+      if (p.wo !== undefined) {
+        all.push({ year: y.y, project: p });
+      }
     });
   });
   all.sort(function(a, b) {
-    var wa = (a.project.wo !== undefined) ? a.project.wo : 999;
-    var wb = (b.project.wo !== undefined) ? b.project.wo : 999;
-    return wa - wb;
+    return a.project.wo - b.project.wo;
   });
   return all;
 }
