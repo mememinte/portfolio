@@ -168,6 +168,7 @@ var D = [
     "p": [
       {
         "n": "Procedural Environment - Personal Project",
+        "wo": 1,
         "s": "Houdini HDA + Unreal Engine",
         "c": "vfx",
         "l": "VFX",
@@ -180,6 +181,7 @@ var D = [
       },
       {
         "n": "Unreal Houdini Volcano",
+        "wo": 7,
         "s": "Personal Project — Houdini + Unreal Engine",
         "c": "vfx",
         "l": "VFX",
@@ -192,6 +194,7 @@ var D = [
       },
       {
         "n": "Amethyst VFX",
+        "wo": 8,
         "s": "Personal Project",
         "c": "vfx",
         "l": "VFX",
@@ -204,6 +207,7 @@ var D = [
       },
       {
         "n": "Unreal Houdini Procedural Bridge",
+        "wo": 9,
         "s": "Personal Project — Houdini + Unreal Engine",
         "c": "vfx",
         "l": "VFX",
@@ -221,6 +225,7 @@ var D = [
     "p": [
       {
         "n": "Electric Square Singapore - FX Artist",
+        "wo": 2,
         "s": "Parallel: A Sci-Fi Card Game",
         "c": "job",
         "l": "Job",
@@ -286,6 +291,7 @@ var D = [
     "p": [
       {
         "n": "Zombie Hunter",
+        "wo": 3,
         "s": "Mobile Shooter — VNG Corporation",
         "c": "vfx",
         "l": "VFX",
@@ -298,6 +304,7 @@ var D = [
       },
       {
         "n": "Sniper Zombie",
+        "wo": 4,
         "s": "Mobile Shooter — VNG Corporation",
         "c": "vfx",
         "l": "VFX",
@@ -310,6 +317,7 @@ var D = [
       },
       {
         "n": "Justin Bieber VR Music Concept",
+        "wo": 5,
         "s": "Future House Studio",
         "c": "vfx",
         "l": "VFX",
@@ -322,6 +330,7 @@ var D = [
       },
       {
         "n": "Teflon Sega VR",
+        "wo": 6,
         "s": "VR Visual Effects",
         "c": "vfx",
         "l": "VFX",
@@ -632,6 +641,11 @@ function flattenProjects() {
     y.p.forEach(function(p) {
       all.push({ year: y.y, project: p });
     });
+  });
+  all.sort(function(a, b) {
+    var wa = (a.project.wo !== undefined) ? a.project.wo : 999;
+    var wb = (b.project.wo !== undefined) ? b.project.wo : 999;
+    return wa - wb;
   });
   return all;
 }
