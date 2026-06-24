@@ -41,6 +41,26 @@ h1 span { color: var(--m); font-weight: 400; }
 .skills { display: flex; flex-wrap: wrap; gap: 8px; }
 .skill { font-size: 12px; padding: 4px 12px; border-radius: 99px; border: 0.5px solid var(--bh); color: var(--m); }
 .slabel { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--h); margin-bottom: 16px; }
+.maintabs { display: flex; gap: 4px; margin-bottom: 32px; border-bottom: 0.5px solid var(--b); }
+.maintab { font-size: 14px; font-weight: 500; padding: 10px 4px; margin-right: 24px; background: transparent; border: none; border-bottom: 2px solid transparent; color: var(--h); cursor: pointer; transition: color .15s; }
+.maintab:hover { color: var(--m); }
+.maintab.active { color: var(--t); border-bottom-color: var(--ac); }
+.tabpanel { display: none; }
+.tabpanel.active { display: block; }
+.worklist { display: flex; flex-direction: column; gap: 24px; }
+.workcard { background: var(--sf); border: 0.5px solid var(--b); border-radius: var(--r); overflow: hidden; transition: border-color .15s; cursor: pointer; }
+.workcard:hover { border-color: var(--bh); }
+.workthumb { width: 100%; aspect-ratio: 16/9; background: #111; position: relative; overflow: hidden; }
+.workthumb img, .workthumb video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.workthumb iframe { width: 100%; height: 100%; border: none; display: block; }
+.workthumb .playbadge { position: absolute; bottom: 12px; right: 12px; background: rgba(0,0,0,0.6); color: #fff; font-size: 11px; padding: 4px 10px; border-radius: 99px; display: flex; align-items: center; gap: 4px; }
+.workinfo { padding: 18px 22px; }
+.worktitle { font-size: 17px; font-weight: 600; color: var(--t); margin-bottom: 4px; }
+.worksub { font-size: 13px; color: var(--m); margin-bottom: 12px; }
+.worktags { display: flex; flex-wrap: wrap; gap: 6px; }
+.workdetail { display: none; border-top: 0.5px solid var(--b); }
+.workcard.open .workdetail { display: block; }
+.workexpand { font-size: 12px; color: var(--at); display: flex; align-items: center; gap: 4px; margin-top: 10px; }
 .ynav { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 40px; position: sticky; top: 0; background: var(--bg); padding: 12px 0; z-index: 10; border-bottom: 0.5px solid var(--b); }
 .ybtn { font-size: 13px; font-weight: 500; padding: 6px 16px; border-radius: 99px; border: 0.5px solid var(--bh); background: transparent; color: var(--m); cursor: pointer; transition: all .15s; }
 .ybtn:hover { background: var(--sf); color: var(--t); }
@@ -92,9 +112,21 @@ footer a:hover { text-decoration: underline; }
 <body>
 <div class="wrap">
 
-  <section class="hero">
-    <h1>Triet Do Minh</h1>
-    <p style="font-size:18px;color:var(--m);margin-bottom:16px;font-weight:400;letter-spacing:-.01em;">Realtime FX Artist &nbsp;·&nbsp; 15 years in game industry</p>
+  <section class="hero" style="padding:48px 0 24px;border-bottom:none;margin-bottom:0;">
+    <h1 style="font-size:28px;margin-bottom:4px;">Triet Do Minh</h1>
+    <p style="font-size:15px;color:var(--m);margin-bottom:0;font-weight:400;letter-spacing:-.01em;">Realtime FX Artist &nbsp;&middot;&nbsp; 15 years in game industry</p>
+  </section>
+
+  <div class="maintabs">
+    <button class="maintab active" id="tab-work" onclick="switchTab('work')">Work</button>
+    <button class="maintab" id="tab-about" onclick="switchTab('about')">About</button>
+  </div>
+
+  <div class="tabpanel active" id="panel-work">
+    <div class="worklist" id="worklist"></div>
+  </div>
+
+  <div class="tabpanel" id="panel-about">
     <p class="bio" style="margin-bottom:20px;">I grew up playing Road Rash, Mario, and Prince of Persia off floppy disks, installing everything myself through Norton Commander before I knew what a developer was. Through high school it was Age of Empires, Counter-Strike, DotA, Lineage 2. I eventually dropped out of university — games had already won.<br><br>I started in the industry as a game tester, moved through community and marketing, then one day nobody at the studio could edit video. I taught myself After Effects, drifted into 3D, and landed my first real VFX role building destruction effects for Age of Empires Definitive Edition. Everything since has been self-taught through YouTube, documentation, and online courses.<br><br>What keeps me in this field isn't just the visuals — it's the constraint. Every effect has to connect the player to the game and run efficiently on the hardware. That tension between impact and performance is what I find genuinely interesting, and it keeps pushing me to find simpler, smarter solutions.</p>
     <div class="contacts">
       <span class="contact" id="email-link" style="cursor:pointer;">&#9993; <span id="email-text"></span></span>
@@ -102,7 +134,7 @@ footer a:hover { text-decoration: underline; }
       <a class="contact" href="https://www.artstation.com/minte131" target="_blank">&#9671; ArtStation</a>
       <a class="contact" href="https://trietvfx.dev">&#11042; trietvfx.dev</a>
     </div>
-    <div class="skills">
+    <div class="skills" style="margin-bottom:32px;">
       <span class="skill">Unity URP</span>
       <span class="skill">HLSL / ShaderLab</span>
       <span class="skill">VFX Graph</span>
@@ -115,11 +147,10 @@ footer a:hover { text-decoration: underline; }
       <span class="skill">Photoshop</span>
       <span class="skill">2D Animation</span>
     </div>
-  </section>
-
-  <div class="slabel">Timeline</div>
-  <nav class="ynav" id="ynav"></nav>
-  <div id="tc"></div>
+    <div class="slabel">Timeline</div>
+    <nav class="ynav" id="ynav"></nav>
+    <div id="tc"></div>
+  </div>
 
   <footer>
     <p>trietvfx.dev &nbsp;&middot;&nbsp; <span id="footer-email-link" style="cursor:pointer;color:var(--at);"><span id="footer-email-text"></span></span></p>
@@ -133,20 +164,12 @@ var D = [
     "y": "2025-2026",
     "p": [
       {
-        "n": "Hype Reel - Lead Visual Effect",
-        "s": "WebGL Mobile Games · Oct 2025 - Jun 2026",
-        "c": "job",
-        "l": "Job",
-        "m": [],
-        "x": "<h3>Company</h3><p><strong>Hype Reel</strong> — Full-time, On-site, Ho Chi Minh City.</p><h3>Responsibilities</h3><ul><li>Collaborate with Game Designers to finalize visual direction for new games and features</li><li>Define and manage production timelines across 2D Animation, 3D Modeling, and Technical Art disciplines — targeting 2+ game launches or major feature releases every 3 weeks</li><li>Assemble assets into gameplay sequences, developing gameplay and environment VFX</li><li>Integrate AI tools to streamline workflows and reduce production time</li><li>Lead R&amp;D efforts for WebGL mobile performance optimization — pushing complex visual features while maintaining stable, cross-device performance</li></ul>",
-        "t": ["Unity", "WebGL", "VFX", "Technical Art", "AI Tools", "Performance Optimization", "2D Animation", "3D Modeling"]
-      },
-      {
         "n": "Procedural Environment - Personal Project",
         "s": "Houdini HDA + Unreal Engine",
         "c": "vfx",
         "l": "VFX",
         "m": [
+          { "kind": "img", "src": "assets/og-image.png", "caption": "Procedural Environment — Unreal Engine" },
           { "kind": "vimeo", "src": "https://player.vimeo.com/video/1005657884?h=e999d740d9", "caption": "Procedural Environment — Houdini + Unreal" }
         ],
         "x": "<h3>Overview</h3><p>Personal project created by making HDA assets in Houdini and finalizing them in Unreal Engine. Includes a procedural house, boat, branches, and a water shader. Flowers, trees, and materials sourced from Megascans.</p><h3>Technical Highlights</h3><ul><li>Used Houdini to store <strong>vertex data</strong> to drive a growing branch effect</li><li>The same technique can be applied to simulate disease spreading through blood vessels or vines</li><li>Water shader built in Unreal with procedural flow and foam</li></ul><h3>Full Breakdown</h3><p><a href=\"https://www.artstation.com/artwork/Zle58x\" target=\"_blank\" style=\"color:var(--at)\">View full breakdown on ArtStation &#8594;</a></p>",
@@ -514,6 +537,100 @@ function sm(cid, idx) {
   }
 })();
 
+function switchTab(tab) {
+  document.getElementById('tab-work').classList.toggle('active', tab === 'work');
+  document.getElementById('tab-about').classList.toggle('active', tab === 'about');
+  document.getElementById('panel-work').classList.toggle('active', tab === 'work');
+  document.getElementById('panel-about').classList.toggle('active', tab === 'about');
+}
+
+function flattenProjects() {
+  var all = [];
+  D.forEach(function(y) {
+    y.p.forEach(function(p) {
+      all.push({ year: y.y, project: p });
+    });
+  });
+  return all;
+}
+
+function buildWorkList() {
+  var list = document.getElementById('worklist');
+  var items = flattenProjects();
+  list.innerHTML = items.map(function(item, idx) {
+    var p = item.project;
+    var wid = 'w' + idx;
+    var hasMedia = p.m && p.m.length > 0;
+    var thumbHTML = '';
+    if (hasMedia) {
+      var firstMedia = p.m[0];
+      if (firstMedia.kind === 'vimeo' || firstMedia.kind === 'youtube') {
+        thumbHTML = '<iframe src="' + firstMedia.src + '" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
+      } else if (firstMedia.kind === 'video') {
+        thumbHTML = '<video src="' + firstMedia.src + '" muted preload="metadata"></video><span class="playbadge">&#9654; ' + p.m.length + ' clip' + (p.m.length !== 1 ? 's' : '') + '</span>';
+      } else if (firstMedia.kind === 'img') {
+        thumbHTML = '<img src="' + firstMedia.src + '" loading="lazy" />';
+      }
+    } else {
+      thumbHTML = '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--h);font-size:13px;">No preview</div>';
+    }
+    return '<div class="workcard" id="' + wid + '">'
+      + '<div class="workthumb" onclick="event.stopPropagation();">' + thumbHTML + '</div>'
+      + '<div class="workinfo" onclick="toggleWork(\'' + wid + '\',' + idx + ')">'
+      + '<div class="worktitle">' + p.n + '</div>'
+      + '<div class="worksub">' + (p.s || '') + ' &nbsp;&middot;&nbsp; ' + item.year + '</div>'
+      + '<div class="worktags">' + p.t.map(function(t) { return '<span class="ptag">' + t + '</span>'; }).join('') + '</div>'
+      + '<div class="workexpand">View details &#9662;</div>'
+      + '</div>'
+      + '<div class="workdetail" id="' + wid + '-detail"></div>'
+      + '</div>';
+  }).join('');
+}
+
+function toggleWork(wid, idx) {
+  var card = document.getElementById(wid);
+  var detail = document.getElementById(wid + '-detail');
+  var isOpen = card.classList.contains('open');
+  if (!isOpen) {
+    var items = flattenProjects();
+    var p = items[idx].project;
+    var id = wid + '_full';
+    var hasMedia = p.m && p.m.length > 0;
+    var vh = '';
+    if (hasMedia) {
+      var embedItems = p.m.filter(function(m) { return m.kind === 'vimeo' || m.kind === 'youtube'; });
+      var videoItems = p.m.filter(function(m) { return m.kind === 'video'; });
+      if (embedItems.length > 0) {
+        vh += embedItems.map(function(m) {
+          return '<div class="mview"><iframe src="' + m.src + '" style="width:100%;height:360px;border:none;display:block;" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div><div class="mcap">' + (m.caption || '') + '</div>';
+        }).join('');
+      }
+      if (videoItems.length === 1) {
+        vh += '<div class="mview"><video id="' + id + '-v" controls style="width:100%;max-height:360px;display:block;" src="' + videoItems[0].src + '"></video></div><div class="mcap" id="' + id + '-c">' + (videoItems[0].caption || '') + '</div>';
+      } else if (videoItems.length > 1) {
+        var firstVid = videoItems[0];
+        var thumbsHTML = videoItems.map(function(m, mi) {
+          return '<div class="mthumb' + (mi === 0 ? ' on' : '') + '" onclick="event.stopPropagation();smv(\'' + id + '\',' + mi + ')" data-src="' + m.src + '" data-cap="' + (m.caption || '') + '"><video muted preload="metadata" src="' + m.src + '"></video></div>';
+        }).join('');
+        vh += '<div class="gallery-toggle" onclick="event.stopPropagation();toggleGallery(\'' + id + '\')" style="display:flex;align-items:center;gap:10px;padding:14px 20px;cursor:pointer;border-bottom:0.5px solid var(--b);user-select:none;background:rgba(127,119,221,0.07);">'
+          + '<span style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--at);">&#9654; All Clips</span>'
+          + '<span style="font-size:12px;color:var(--at);background:rgba(127,119,221,0.18);padding:3px 10px;border-radius:99px;border:0.5px solid rgba(127,119,221,0.3);">' + videoItems.length + ' clips</span>'
+          + '<span style="flex:1;"></span><span id="' + id + '-garr" style="font-size:12px;color:var(--at);">&#9662;</span></div>'
+          + '<div id="' + id + '-gallery" style="display:none;">'
+          + '<div class="mview"><video id="' + id + '-v" controls style="width:100%;max-height:360px;display:block;" src="' + firstVid.src + '"></video></div>'
+          + '<div style="display:flex;align-items:center;gap:10px;padding:8px 20px;border-bottom:0.5px solid var(--b);">'
+          + '<span id="' + id + '-sidx" style="font-size:11px;color:var(--h);white-space:nowrap;min-width:40px;">1 / ' + videoItems.length + '</span>'
+          + '<input type="range" id="' + id + '-slider" min="0" max="' + (videoItems.length-1) + '" value="0" style="flex:1;cursor:pointer;" oninput="smv(\'' + id + '\',this.valueAsNumber)" />'
+          + '<span class="mcap" id="' + id + '-c" style="padding:0;border:none;text-align:right;flex:2;">' + (firstVid.caption || '') + '</span></div>'
+          + '<div class="mthumbs">' + thumbsHTML + '</div></div>';
+      }
+    }
+    detail.innerHTML = vh + '<div class="ptext">' + (p.x || '') + '</div>';
+  }
+  card.classList.toggle('open');
+}
+
+buildWorkList();
 buildNav();
 buildTimeline();
 </script>
