@@ -48,14 +48,17 @@ h1 span { color: var(--m); font-weight: 400; }
 .tabpanel { display: none; }
 .tabpanel.active { display: block; }
 .worklist { display: flex; flex-direction: column; gap: 24px; }
-.workcard { background: var(--sf); border: 0.5px solid var(--b); border-radius: var(--r); overflow: hidden; transition: border-color .15s; cursor: pointer; }
+.workcard { background: var(--sf); border: 0.5px solid var(--b); border-radius: var(--r); overflow: hidden; transition: border-color .15s; }
 .workcard:hover { border-color: var(--bh); }
-.workthumb { width: 100%; aspect-ratio: 16/9; background: #111; position: relative; overflow: hidden; }
+.workthumb { width: 100%; aspect-ratio: 21/9; background: #111; position: relative; overflow: hidden; cursor: pointer; }
 .workthumb img, .workthumb video { width: 100%; height: 100%; object-fit: cover; display: block; }
 .workthumb iframe { width: 100%; height: 100%; border: none; display: block; }
 .workthumb .playbadge { position: absolute; bottom: 12px; right: 12px; background: rgba(0,0,0,0.6); color: #fff; font-size: 11px; padding: 4px 10px; border-radius: 99px; display: flex; align-items: center; gap: 4px; }
-.workinfo { padding: 18px 22px; }
+.workthumb .worktitle-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 24px 22px 16px; background: linear-gradient(to top, rgba(0,0,0,0.75), transparent); pointer-events: none; }
+.workinfo { display: none; padding: 18px 22px; }
+.workcard.open .workinfo { display: block; }
 .worktitle { font-size: 17px; font-weight: 600; color: var(--t); margin-bottom: 4px; }
+.worktitle-overlay .worktitle { color: #fff; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
 .worksub { font-size: 13px; color: var(--m); margin-bottom: 12px; }
 .worktags { display: flex; flex-wrap: wrap; gap: 6px; }
 .workdetail { display: none; border-top: 0.5px solid var(--b); }
